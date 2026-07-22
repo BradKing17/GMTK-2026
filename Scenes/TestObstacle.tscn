@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cg273nyklkupw"]
+
+[ext_resource type="Texture2D" uid="uid://nruu7s0ldr2d" path="res://icon.svg" id="1_36peq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_rdbqk"]
+
+[node name="Node2D" type="Node2D" unique_id=936021133]
+scale = Vector2(-50, -50)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1552923465]
+mesh = SubResource("QuadMesh_rdbqk")
+texture = ExtResource("1_36peq")

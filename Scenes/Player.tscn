@@ -1,3 +1,21 @@
 [gd_scene format=3 uid="uid://oqh5oxx1mkyn"]
 
-[node name="Node2D" type="Node2D" unique_id=1098916475]
+[ext_resource type="Script" uid="uid://bbfk8o1ml0tc0" path="res://Scripts/PlayerController.cs" id="1_rpqav"]
+[ext_resource type="Texture2D" uid="uid://em2s2lpyvs0s" path="res://Textures/cat.png" id="2_kyqiw"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_s1t60"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1t60"]
+
+[node name="Player" type="CharacterBody2D" unique_id=1137179958]
+scale = Vector2(5, 5)
+script = ExtResource("1_rpqav")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1313329828]
+scale = Vector2(-10, -10)
+mesh = SubResource("QuadMesh_s1t60")
+texture = ExtResource("2_kyqiw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1481923628]
+shape = SubResource("CircleShape2D_s1t60")
