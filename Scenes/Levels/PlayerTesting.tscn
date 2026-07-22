@@ -5,27 +5,27 @@
 
 [node name="Node2D" type="Node2D" unique_id=974365681]
 
-[node name="Player" parent="." unique_id=1098916475 instance=ExtResource("1_dg17q")]
-position = Vector2(598.99994, 320.99997)
-moveSpeed = 100.0
-health = 100.0
-
 [node name="Node2D" parent="." unique_id=936021133 instance=ExtResource("2_xk2ot")]
 position = Vector2(303.00006, 188)
-rotation = 3.1415927
+rotation = -3.1415925
 scale = Vector2(250, 250)
 
 [node name="Node2D2" parent="." unique_id=727671642 instance=ExtResource("2_xk2ot")]
 position = Vector2(927, 179.00002)
-rotation = 3.1415927
+rotation = -3.1415925
 scale = Vector2(250, 250)
 
 [node name="Node2D3" parent="." unique_id=1933104045 instance=ExtResource("2_xk2ot")]
 position = Vector2(845.00006, 476)
-rotation = 3.1415927
+rotation = -3.1415925
 scale = Vector2(250, 250)
 
 [node name="Node2D4" parent="." unique_id=866333995 instance=ExtResource("2_xk2ot")]
 position = Vector2(326, 482)
-rotation = 3.1415927
+rotation = -3.1415925
 scale = Vector2(250, 250)
+
+[node name="Player" parent="." unique_id=1098916475 instance=ExtResource("1_dg17q")]
+position = Vector2(598.99994, 320.99997)
+moveSpeed = 400.0
+health = 100.0
