@@ -17,6 +17,7 @@ public partial class HealthController : Node
     public void SetFillLevel(float fV)
     {
         (material as ShaderMaterial).SetShaderParameter("fill_value", fV);
+        GetChild<RichTextLabel>(1).Text = $"{fV * 100} ml";
     }
 
     public void SlerpToFillLevel(float fromLevel, float destinationLevel, float t)
