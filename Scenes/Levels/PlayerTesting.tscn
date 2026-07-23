@@ -26,6 +26,6 @@ rotation = -3.1415925
 scale = Vector2(250, 250)
 
 [node name="Player" parent="." unique_id=1098916475 instance=ExtResource("1_dg17q")]
-position = Vector2(598.99994, 320.99997)
+position = Vector2(582, 339)
 moveSpeed = 400.0
 health = 100.0
