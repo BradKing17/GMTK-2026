@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dxrhk26lmnr6u"]
+
+[ext_resource type="Script" uid="uid://dliwg584tna42" path="res://Assets/Scripts/HealthController.cs" id="1_0euo0"]
+[ext_resource type="Shader" uid="uid://c5mbs15ndg0yf" path="res://Assets/Shaders/Health.gdshader" id="1_u5ll1"]
+[ext_resource type="Texture2D" uid="uid://nruu7s0ldr2d" path="res://icon.svg" id="2_0euo0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_12ciu"]
+shader = ExtResource("1_u5ll1")
+shader_parameter/backFillColour = Color(0.6580032, 0, 0.14376104, 1)
+shader_parameter/frontFillInnerColour = Color(0.9756643, 5.6072327e-06, 2.117753e-06, 1)
+shader_parameter/frontFillOuterColour = Color(0.9764706, 0, 0, 1)
+shader_parameter/ringColour = Color(0, 0.16, 0.13, 1)
+shader_parameter/fresnelColour = Color(0, 0.88, 1, 1)
+shader_parameter/innerRingGlowColour = Color(0, 1, 1, 1)
+shader_parameter/fillcolour = Color(1, 1, 1, 1)
+shader_parameter/ringWidth = 0.15
+shader_parameter/innerCircleRadiusOffset = 0.0
+shader_parameter/fill_value = 0.0
+
+[node name="HealthJug" type="Node2D" unique_id=49203889]
+script = ExtResource("1_0euo0")
+
+[node name="Blood" type="Sprite2D" parent="." unique_id=714237609]
+material = SubResource("ShaderMaterial_12ciu")
+position = Vector2(128, 112)
+texture = ExtResource("2_0euo0")
+
+[node name="LevelLabel" type="RichTextLabel" parent="." unique_id=942190167]
+offset_left = 102.0
+offset_top = 96.0
+offset_right = 156.0
+offset_bottom = 119.0
+text = "0 ml"
+horizontal_alignment = 2
