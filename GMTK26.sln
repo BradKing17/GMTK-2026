@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMTK26", "GMTK26.csproj", "{DEFCF202-94AA-4D44-8769-F23C20B76B7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMTK26", "GMTK26.csproj", "{8B5CFC81-74A5-4F59-8163-94CFA25EDC7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DEFCF202-94AA-4D44-8769-F23C20B76B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEFCF202-94AA-4D44-8769-F23C20B76B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEFCF202-94AA-4D44-8769-F23C20B76B7E}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{DEFCF202-94AA-4D44-8769-F23C20B76B7E}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{DEFCF202-94AA-4D44-8769-F23C20B76B7E}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{DEFCF202-94AA-4D44-8769-F23C20B76B7E}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{8B5CFC81-74A5-4F59-8163-94CFA25EDC7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B5CFC81-74A5-4F59-8163-94CFA25EDC7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B5CFC81-74A5-4F59-8163-94CFA25EDC7C}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{8B5CFC81-74A5-4F59-8163-94CFA25EDC7C}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{8B5CFC81-74A5-4F59-8163-94CFA25EDC7C}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{8B5CFC81-74A5-4F59-8163-94CFA25EDC7C}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal
