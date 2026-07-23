@@ -2,5 +2,4 @@
 .godot/
 /android/
 /*.sln
-/*.csproj
-/*.csproj.old
+/*.csproj*
