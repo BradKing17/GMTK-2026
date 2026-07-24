@@ -15,13 +15,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wovta"]
-radius = 79.00633
+radius = 51.0392
 
 [node name="Enemy" type="CharacterBody2D" unique_id=2055579222]
 script = ExtResource("1_wovta")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=193133487]
-scale = Vector2(0.16295706, 0.15445863)
+scale = Vector2(0.108505554, 0.104299374)
 sprite_frames = SubResource("SpriteFrames_xeo28")
 animation = &"Default"
 

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://7v0jl40meh7a" path="res://Assets/Art/AttackCat.png" id="4_dewec"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1t60"]
-radius = 99.0202
+radius = 51.351727
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8g2fy"]
 animations = [{
@@ -39,7 +39,7 @@ position = Vector2(478, -235)
 fillValue = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091735285]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.26976284, 0.26953125)
 sprite_frames = SubResource("SpriteFrames_8g2fy")
 animation = &"Default"
 
