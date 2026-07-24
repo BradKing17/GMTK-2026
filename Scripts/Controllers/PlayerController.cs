@@ -22,7 +22,6 @@ public partial class PlayerController : CharacterBody2D
 		AddToGroup("Player");
 		GameStart();
 	}
-
 	public void GameStart()
 	{
 		Print("Game Started");
@@ -50,8 +49,7 @@ public partial class PlayerController : CharacterBody2D
 				}
 			}
 			else
-			{	
-
+			{
 				isAttacking = false;
 				playerSprite.Frame = 0;
 			}
@@ -103,10 +101,11 @@ public partial class PlayerController : CharacterBody2D
 		{
 			Print(health);
 			health += 1000.0f;
-			if(health > maxHealth)
+			if (health > maxHealth)
 			{
 				health = maxHealth;
 			}
+
             healthController.SetFillLevel(health);
 			Print(health);
             healthController.SpringLeak();
@@ -120,5 +119,4 @@ public partial class PlayerController : CharacterBody2D
 			Print($"hit {holes}");
 		}
 	}
-
 }
