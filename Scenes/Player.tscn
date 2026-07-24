@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://7v0jl40meh7a" path="res://Assets/Art/AttackCat.png" id="4_dewec"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1t60"]
+radius = 99.0202
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8g2fy"]
 animations = [{
@@ -21,23 +22,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1137179958 node_paths=PackedStringArray("playerSprite")]
-position = Vector2(577, 327)
+[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite")]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_rpqav")
 moveSpeed = 100.0
 playerSprite = NodePath("AnimatedSprite2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1481923628]
-shape = SubResource("CircleShape2D_s1t60")
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1721885316]
+
+[node name="PlayerCollision2" type="CollisionShape2D" parent="." unique_id=581068405]
+shape = SubResource("CircleShape2D_s1t60")
 
 [node name="HealthJug" parent="." unique_id=49203889 instance=ExtResource("3_gntrk")]
 position = Vector2(478, -235)
 fillValue = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1091735285]
-rotation = 3.1415927
-scale = Vector2(-0.5, -0.5)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_8g2fy")
 animation = &"Default"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=236963478]
+
+[node name="OverlapShape" type="CollisionShape2D" parent="Area2D" unique_id=1936640181]
+shape = SubResource("CircleShape2D_s1t60")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnOverlap"]

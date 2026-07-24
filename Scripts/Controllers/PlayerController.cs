@@ -20,6 +20,7 @@ public partial class PlayerController : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		AddToGroup("Player");
 		GameStart();
 	}
 
@@ -38,9 +39,9 @@ public partial class PlayerController : CharacterBody2D
 		{
 			Velocity = Position.DirectionTo(target) * moveSpeed * 2;
 			if (Position.DistanceTo(target) > 20.0f)
-        	{
-        		MoveAndSlide();	
-        	}
+			{
+				MoveAndSlide();
+			}
 			else
 			{	
 				Velocity = Vector2.Zero;
@@ -53,7 +54,6 @@ public partial class PlayerController : CharacterBody2D
 			GetInput();
 			MoveAndSlide();
 		}
-		
 	
 	
 		
@@ -70,33 +70,37 @@ public partial class PlayerController : CharacterBody2D
 			GetTree().Quit();
 		}
 
-		Print(health);
 	}
 
  public override void _Input(InputEvent @event)
-    {
+	{
 		
-        if (@event.IsActionPressed("attack"))
-        {
+		if (@event.IsActionPressed("attack"))
+		{
 			isAttacking = true;
 			Vector2 clickPosition = GetGlobalMousePosition();
 			 Vector2 offset = clickPosition - GlobalPosition;
-            float distance = offset.Length();
+		   // float distance = offset.Length();
 
-            target = GlobalPosition + (offset.Normalized() * MaxRadius);
+			target = GlobalPosition + (offset.Normalized() * MaxRadius);
 
 			playerSprite.Frame = 1;
-        }
-    }
+		}
+	}
 
 	public void GetInput()
-    {
+	{
 		if(!isAttacking)
 		{
-        	Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-        	Velocity = inputDirection * moveSpeed;
+			Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+			Velocity = inputDirection * moveSpeed;
 		}
-    }
+	}
+
+	public void OnOverlap(Node2D body)
+	{
+		Print("Fuck off");
+	}
 
 
 }
