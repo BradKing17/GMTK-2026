@@ -48,6 +48,7 @@ textLabel = NodePath("LevelLabel")
 drainArea = NodePath("DrainSpawnArea")
 leakParent = NodePath("Leaks")
 packedParticle = ExtResource("4_hd5fr")
+metadata/_edit_group_ = true
 
 [node name="Blood" type="Sprite2D" parent="HealthJug" unique_id=714237609]
 material = SubResource("ShaderMaterial_12ciu")

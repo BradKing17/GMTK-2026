@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://50y0e1gwhp37"]
+
+[ext_resource type="Texture2D" uid="uid://c5xw0mwuq2l5v" path="res://Assets/Art/enemy.png" id="1_m1htj"]
+[ext_resource type="Script" uid="uid://dj7no23s10bql" path="res://Scripts/Controllers/BaseEnemy.cs" id="1_wovta"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xeo28"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m1htj")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wovta"]
+radius = 79.00633
+
+[node name="Enemy" type="CharacterBody2D" unique_id=2055579222]
+script = ExtResource("1_wovta")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=193133487]
+scale = Vector2(0.16295706, 0.15445863)
+sprite_frames = SubResource("SpriteFrames_xeo28")
+animation = &"Default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1132903235]
+shape = SubResource("CircleShape2D_wovta")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=160105726]
+
+[node name="OverlapShape" type="CollisionShape2D" parent="Area2D" unique_id=1598783923]
+shape = SubResource("CircleShape2D_wovta")
