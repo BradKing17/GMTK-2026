@@ -118,6 +118,13 @@ public partial class PlayerController : CharacterBody2D
 			Print(health);
 			body.QueueFree();
 		}
+
+		if(body is Projectile)
+		{
+			holes++;
+			body.QueueFree();
+			Print(holes);
+		}
 	}
 
 }

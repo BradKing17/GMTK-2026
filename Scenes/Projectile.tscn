@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bqptxoqkwb6j8"]
+
+[ext_resource type="Script" uid="uid://dtrup61wu441d" path="res://Scripts/Projectile.cs" id="1_k1cl8"]
+[ext_resource type="Texture2D" uid="uid://7v0jl40meh7a" path="res://Assets/Art/AttackCat.png" id="2_y0kec"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_6dbt5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1t60"]
+
+[node name="Node2D" type="Area2D" unique_id=1809475923]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_k1cl8")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=486062375]
+rotation = -3.1415927
+scale = Vector2(98.78, 100)
+mesh = SubResource("QuadMesh_6dbt5")
+texture = ExtResource("2_y0kec")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1230041202]
+shape = SubResource("CircleShape2D_s1t60")

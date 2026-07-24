@@ -22,11 +22,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1011472595]
-collision_layer = 2
-collision_mask = 2
+[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite")]
 script = ExtResource("1_rpqav")
 moveSpeed = 100.0
+playerSprite = NodePath("AnimatedSprite2D")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1721885316]
 
@@ -39,6 +38,8 @@ sprite_frames = SubResource("SpriteFrames_8g2fy")
 animation = &"Default"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=236963478]
+collision_layer = 2
+collision_mask = 2
 
 [node name="OverlapShape" type="CollisionShape2D" parent="Area2D" unique_id=1936640181]
 shape = SubResource("CircleShape2D_s1t60")
