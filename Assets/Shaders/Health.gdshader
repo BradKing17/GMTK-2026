@@ -19,8 +19,7 @@ uniform float ringWidth = 0.15;
 uniform float innerCircleRadiusOffset = 0.0;
 //fill_value,填充球体的值
 uniform float fill_value : hint_range(-0, 1) = 0.25;
-
-
+uniform float wave_speed : hint_range(2.0, 12.0) = 2;
 
 // 定义函数：计算点到圆弧的距离
 float sdArc(in vec2 p, in vec2 sc, in float ra, float rb)
@@ -54,10 +53,10 @@ void fragment() {
     const float waveFrequency = 2.0;
     const float waveAmplitude = 0.05;
     
-    const float waveAnimation = 2.0;
+    //const float waveAnimation = 2.0;
     
-    float frontWavePhase = (TIME * waveAnimation) + uv.x;
-    float backWavePhase = (TIME * -waveAnimation) + uv.x;
+    float frontWavePhase = (TIME * wave_speed) + uv.x;
+    float backWavePhase = (TIME * -wave_speed) + uv.x;
         
     frontWavePhase *= waveFrequency;
     backWavePhase *= waveFrequency;
@@ -91,22 +90,5 @@ void fragment() {
     vec3 rgb =
         ((frontFill * frontFillColour) +
         (backFill * backFillColour));
-	
-    const float backgroundGradientPower = 0.6;
-    
-    float backgroundGradient = length(normalizedCenteredUV);
-    
-    backgroundGradient = pow(backgroundGradient, backgroundGradientPower);
-    backgroundGradient = smoothstep(0.0, 1.0, backgroundGradient);//第一个参数是背景阴影的亮度
-    
-    vec3 backgroundGradientInnerColour = vec3(0.13, 0.0, 0.4);
-    vec3 backgroundGradientOuterColour = vec3(0.0, 0.0, 0.0);//背景外玻璃颜色
-    
-    vec3 background = mix(backgroundGradientInnerColour, backgroundGradientOuterColour, backgroundGradient);
-    background = clamp(background - (fill), 0.0, 1.0);//背景-（填充+环）,亮度参数1,亮度参数2
-         
-    const float backgroundStrength = 0.65;//背景强度    
-    background *= backgroundStrength;
-	
 	COLOR = vec4(rgb, mask);
 }
