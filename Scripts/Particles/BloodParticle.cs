@@ -14,25 +14,19 @@ public partial class BloodParticle : GpuParticles2D
     {
         pm = ProcessMaterial as ParticleProcessMaterial;
     }
-
     public override void _EnterTree()
     {
         base._EnterTree();
         pm.ResourceLocalToScene = true;
         burstEmitter = this.GetChild<GpuParticles2D>(0);
-        // (burstEmitter.Material as ParticleProcessMaterial).ResourceLocalToScene = true;
     }
     public override void _Ready()
     {
         base._Ready();
-        // burstEmitter.Material.ResourceLocalToScene = true;
+
         if (flipX)
         {
             Scale = new(Scale.X *-1, Scale.Y);
-            // Vector3 newDirection = new(pm.Direction.X * -1,pm.Direction.Y,pm.Direction.Z);
-            // pm.Direction = newDirection;
-            // ParticleProcessMaterial bE = burstEmitter.ProcessMaterial as ParticleProcessMaterial;
-            // bE.Direction =  new(bE.Direction.X * -1,bE.Direction.Y,bE.Direction.Z);
         }
 
         RandomNumberGenerator rng = new();
@@ -97,7 +91,6 @@ public partial class BloodParticle : GpuParticles2D
                 .SetEase(Tween.EaseType.In);
             tween.SetLoops();
     }
-    
     public void StopFlow()
     {
         if (stopping) { return; }

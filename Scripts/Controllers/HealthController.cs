@@ -16,7 +16,6 @@ public partial class HealthController : Node
     {
         leaks = [];
     }
-
     public override void _Ready()
     {
         bloodShader ??= GetChild<Sprite2D>(0);
@@ -26,13 +25,11 @@ public partial class HealthController : Node
         material.SetShaderParameter("fill_value", fillValue);
         SlerpToFillLevel(fillValue, 1, 10f);
     }
-
     public void SetFillLevel(float fV)
     {
         material.SetShaderParameter("fill_value", fV);
         textLabel.Text = $"{fV * 100} ml";
     }
-
     public void SlerpToFillLevel(float fromLevel, float destinationLevel, float t)
     {
         Tween tween = GetTree().CreateTween();
@@ -41,7 +38,6 @@ public partial class HealthController : Node
         tween.TweenProperty(material,"shader_parameter/fill_value", destinationLevel, t);
         tween.Chain();
     }
-
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
@@ -55,12 +51,10 @@ public partial class HealthController : Node
             PlugLeak();
         }
     }
-
     private void SetLabelText(int value)
     {
         textLabel.Text = $"{value} ml";
     }
-
     public void SpringLeak()
     {
         int randomSide = new RandomNumberGenerator().RandiRange(0,1);        
@@ -70,7 +64,6 @@ public partial class HealthController : Node
         leaks.Add(leak);
         leak.Position = PositionInRegion(drainArea.GetChildren()[randomSide] as CollisionShape2D);
     }
-
     private Vector2 PositionInRegion(CollisionShape2D spawnRegion)
     {
         RectangleShape2D shape = spawnRegion.Shape as RectangleShape2D;
