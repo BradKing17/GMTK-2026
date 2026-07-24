@@ -5,6 +5,7 @@ using static Godot.GD;
 public partial class PlayerController : CharacterBody2D
 {
 		[Export] private float moveSpeed = 5.0f;
+		[Export] private float maxHealth = 5500.0f;
 		[Export] private float health = 5500.0f;
 		[Export] private float rateOfBloodLoss = 10.0f;
 		[Export] private int holes = 0;
@@ -27,6 +28,7 @@ public partial class PlayerController : CharacterBody2D
 	public void GameStart()
 	{
 		Print("Game Started");
+		health = maxHealth;
 		holes = 1;
 		canMove = true;
 	}
@@ -40,11 +42,17 @@ public partial class PlayerController : CharacterBody2D
 			Velocity = Position.DirectionTo(target) * moveSpeed * 2;
 			if (Position.DistanceTo(target) > 20.0f)
 			{
-				MoveAndSlide();
+				bool collided =MoveAndSlide();
+				if(collided)
+				{
+					Velocity = Vector2.Zero;
+					isAttacking = false;
+					playerSprite.Frame = 0;
+				}
 			}
 			else
 			{	
-				Velocity = Vector2.Zero;
+
 				isAttacking = false;
 				playerSprite.Frame = 0;
 			}
@@ -99,8 +107,17 @@ public partial class PlayerController : CharacterBody2D
 
 	public void OnOverlap(Node2D body)
 	{
-		Print("Fuck off");
+		if(body is BaseEnemy)
+		{
+			Print(health);
+			health += 1000.0f;
+			if(health > maxHealth)
+			{
+				health = maxHealth;
+			}
+			Print(health);
+			body.QueueFree();
+		}
 	}
-
 
 }

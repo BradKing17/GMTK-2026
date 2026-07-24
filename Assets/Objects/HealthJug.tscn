@@ -26,7 +26,7 @@ length = 0.001
 
 [sub_resource type="Animation" id="Animation_hd5fr"]
 resource_name = "shake"
-length = 0.19999999999999998
+length = 0.2
 loop_mode = 2
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3piac"]
@@ -36,6 +36,7 @@ _data = {
 }
 
 [node name="HealthJug" type="Node2D" unique_id=49203889 node_paths=PackedStringArray("bloodShader", "textLabel", "drainArea", "leakParent")]
+position = Vector2(582, 270)
 script = ExtResource("1_gwqy7")
 testing = true
 bloodShader = NodePath("Blood")
@@ -43,6 +44,7 @@ textLabel = NodePath("LevelLabel")
 drainArea = NodePath("DrainSpawnArea")
 leakParent = NodePath("Leaks")
 packedParticle = ExtResource("4_hd5fr")
+metadata/_edit_group_ = true
 
 [node name="Blood" type="Sprite2D" parent="." unique_id=714237609]
 material = SubResource("ShaderMaterial_12ciu")
