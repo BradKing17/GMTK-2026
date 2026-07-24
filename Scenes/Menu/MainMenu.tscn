@@ -1,51 +1,333 @@
 [gd_scene format=3 uid="uid://el10qpxsye3d"]
 
 [ext_resource type="FontFile" uid="uid://dllg2gi83a8l" path="res://Assets/Fonts/One Slice.otf" id="1_a2ivp"]
+[ext_resource type="Texture2D" uid="uid://dtghqviceey6s" path="res://Assets/Art/bloodDrop.png" id="1_mj0i0"]
+[ext_resource type="Script" uid="uid://cht5f63754ot5" path="res://Scripts/MainMenu/MainMenu.cs" id="1_p4pvn"]
+[ext_resource type="PackedScene" uid="uid://ce56x77qgr2up" path="res://Scenes/Levels/PlayerTesting.tscn" id="2_s3ie0"]
 
-[node name="MainMenu" type="Node2D" unique_id=1414753860]
+[sub_resource type="Curve" id="Curve_i5oj1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.35802472, 0.4716981), -4.73774, -4.73774, 0, 0, Vector2(0.4268078, 0), -3.1202824, 0.0, 0, 0]
+point_count = 3
 
-[node name="Control" type="Control" parent="." unique_id=2110812863]
+[sub_resource type="CurveTexture" id="CurveTexture_o8864"]
+curve = SubResource("Curve_i5oj1")
+
+[sub_resource type="Gradient" id="Gradient_upxv2"]
+offsets = PackedFloat32Array(0.011342155, 0.60113424)
+colors = PackedColorArray(1, 1, 1, 1, 0.8260324, 0.78339547, 0.4336046, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a1nta"]
+gradient = SubResource("Gradient_upxv2")
+width = 858
+
+[sub_resource type="Curve" id="Curve_fj0eq"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.04043126), 0.0, 0.2218511, 0, 0, Vector2(1, 0.1940701), 0.4849415, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tms7s"]
+curve = SubResource("Curve_fj0eq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_35riq"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 18.455, 1)
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 150, 0)
+damping_min = 39.36
+damping_max = 52.800003
+scale_min = 3.1999998
+scale_max = 3.1999998
+scale_over_velocity_max = 500.0
+scale_over_velocity_curve = SubResource("CurveTexture_tms7s")
+color = Color(0.9411765, 0, 0.011764706, 0.21960784)
+color_ramp = SubResource("GradientTexture1D_a1nta")
+alpha_curve = SubResource("CurveTexture_o8864")
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.0
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 1
+sub_emitter_keep_velocity = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p4pvn"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(90, 0, 1)
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 150, 0)
+damping_min = 39.36
+damping_max = 52.800003
+scale_min = 3.1999998
+scale_max = 3.1999998
+scale_over_velocity_max = 500.0
+scale_over_velocity_curve = SubResource("CurveTexture_tms7s")
+color = Color(0.9411765, 0, 0.011764706, 0.21960784)
+color_ramp = SubResource("GradientTexture1D_a1nta")
+alpha_curve = SubResource("CurveTexture_o8864")
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.0
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 1
+sub_emitter_keep_velocity = true
+
+[sub_resource type="Animation" id="Animation_35riq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title/Count/TitleReveal:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title/Comma/TitleReveal:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_mj0i0"]
+resource_name = "RevealTitle"
+length = 2.5000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title/Count/TitleReveal:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title/Comma/TitleReveal:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_35riq"]
+_data = {
+&"RESET": SubResource("Animation_35riq"),
+&"RevealTitle": SubResource("Animation_mj0i0")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mj0i0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p4pvn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s3ie0"]
+
+[node name="MainMenu" type="Node2D" unique_id=1414753860 node_paths=PackedStringArray("animationPlayer", "playButton")]
+script = ExtResource("1_p4pvn")
+animationPlayer = NodePath("AnimationPlayer")
+mainGame = ExtResource("2_s3ie0")
+playButton = NodePath("Control/Play")
+
+[node name="BloodDrop" type="Sprite2D" parent="." unique_id=1183060385]
+modulate = Color(0.29803923, 0, 0, 1)
+position = Vector2(585, 309.00003)
+rotation = 3.1415927
+scale = Vector2(72.39456, 72.39456)
+texture = ExtResource("1_mj0i0")
+
+[node name="Title" type="Control" parent="." unique_id=2110812863]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 165.0
-offset_top = 85.0
-offset_right = 165.0
-offset_bottom = 85.0
+offset_left = 461.0
+offset_top = 134.0
+offset_right = 461.0
+offset_bottom = 134.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Count" type="RichTextLabel" parent="Control" unique_id=1066081486]
+[node name="Count" type="RichTextLabel" parent="Title" unique_id=1066081486]
+clip_children = 1
 layout_mode = 0
-offset_left = 5.0
-offset_top = 2.0
-offset_right = 232.0
-offset_bottom = 108.0
+offset_left = -260.0
+offset_top = -126.0
+offset_right = 472.0
+offset_bottom = 461.0
+theme_override_constants/line_separation = -70
+theme_override_constants/paragraph_separation = 0
 theme_override_fonts/normal_font = ExtResource("1_a2ivp")
-theme_override_font_sizes/normal_font_size = 100
-text = "COUNT"
+theme_override_font_sizes/normal_font_size = 275
+text = "COUNT
+DOWN"
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Comma" type="RichTextLabel" parent="Control" unique_id=109324501]
+[node name="TitleReveal" type="GPUParticles2D" parent="Title/Count" unique_id=1483041382]
+position = Vector2(136, 28)
+amount = 5415
+texture = ExtResource("1_mj0i0")
+lifetime = 9.08
+speed_scale = 1.69
+randomness = 1.0
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.91
+process_material = SubResource("ParticleProcessMaterial_35riq")
+
+[node name="CountOutline" type="RichTextLabel" parent="Title" unique_id=498295948]
+visible = false
+modulate = Color(0, 0, 0, 0.5568628)
+clip_children = 1
 layout_mode = 0
-offset_left = 223.0
-offset_top = 8.0
-offset_right = 246.0
-offset_bottom = 115.0
+offset_left = -260.0
+offset_top = -126.0
+offset_right = 472.0
+offset_bottom = 461.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -70
+theme_override_constants/outline_size = 20
 theme_override_fonts/normal_font = ExtResource("1_a2ivp")
-theme_override_font_sizes/normal_font_size = 100
+theme_override_font_sizes/normal_font_size = 275
+text = "COUNT
+DOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleReveal" type="GPUParticles2D" parent="Title/CountOutline" unique_id=1385859328]
+position = Vector2(136, 28)
+amount = 5415
+texture = ExtResource("1_mj0i0")
+lifetime = 9.08
+speed_scale = 1.69
+randomness = 1.0
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.91
+process_material = SubResource("ParticleProcessMaterial_35riq")
+
+[node name="Comma" type="RichTextLabel" parent="Title" unique_id=109324501]
+clip_children = 1
+layout_mode = 0
+offset_left = 404.0
+offset_top = -71.0
+offset_right = 475.0
+offset_bottom = 214.30435
+theme_override_fonts/normal_font = ExtResource("1_a2ivp")
+theme_override_font_sizes/normal_font_size = 275
 text = ","
 vertical_alignment = 1
 
-[node name="Down" type="RichTextLabel" parent="Control" unique_id=1291070931]
+[node name="TitleReveal" type="GPUParticles2D" parent="Title/Comma" unique_id=1656498110]
+position = Vector2(12, 67)
+emitting = false
+amount = 1000
+texture = ExtResource("1_mj0i0")
+lifetime = 7.16
+speed_scale = 1.8399999999999999
+randomness = 1.0
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.91
+process_material = SubResource("ParticleProcessMaterial_p4pvn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1047299750]
+libraries/ = SubResource("AnimationLibrary_35riq")
+autoplay = &"RevealTitle"
+
+[node name="Control" type="Control" parent="." unique_id=675385643]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 459.0
+offset_top = 213.0
+offset_right = 459.0
+offset_bottom = 213.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Play" type="Button" parent="Control" unique_id=1740635978]
+layout_mode = 0
+offset_left = -447.0
+offset_top = 252.0
+offset_right = -324.0
+offset_bottom = 337.0
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_pressed_color = Color(0.18598092, 0.18598092, 0.18598086, 1)
+theme_override_colors/font_hover_color = Color(0.42493114, 0.4249309, 0.42493057, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_a2ivp")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mj0i0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_p4pvn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_s3ie0")
+text = "play"
+
+[node name="By" type="RichTextLabel" parent="Control" unique_id=1745938657]
+modulate = Color(1, 0.8064659, 0.7644628, 0.8784314)
 clip_contents = false
 layout_mode = 0
-offset_left = 4.0
-offset_top = 86.0
-offset_right = 217.0
-offset_bottom = 197.0
+offset_left = -445.0
+offset_top = 316.0
+offset_right = -218.0
+offset_bottom = 422.0
 theme_override_fonts/normal_font = ExtResource("1_a2ivp")
-theme_override_font_sizes/normal_font_size = 100
-text = "down
+theme_override_font_sizes/normal_font_size = 20
+text = "by
 "
-horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DevCredits" type="RichTextLabel" parent="Control/By" unique_id=97255057]
+modulate = Color(1, 0.8064659, 0.7644628, 0.8784314)
+layout_mode = 0
+offset_top = 39.0
+offset_right = 227.0
+offset_bottom = 145.0
+theme_override_constants/line_separation = -9
+theme_override_fonts/normal_font = ExtResource("1_a2ivp")
+theme_override_font_sizes/normal_font_size = 30
+text = "BradTheBreadMan
+Xenntric"
+vertical_alignment = 1
+
+[node name="SpecialThanks" type="RichTextLabel" parent="Control" unique_id=1764569998]
+modulate = Color(1, 0.8064659, 0.7644628, 0.8784314)
+clip_contents = false
+layout_mode = 0
+offset_left = 572.0
+offset_top = 337.0
+offset_right = 799.0
+offset_bottom = 443.0
+theme_override_fonts/normal_font = ExtResource("1_a2ivp")
+theme_override_font_sizes/normal_font_size = 20
+text = "special thanks
+"
+vertical_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="Control/SpecialThanks" unique_id=1218102798]
+modulate = Color(1, 0.80784315, 0.7647059, 0.8784314)
+layout_mode = 0
+offset_left = -178.0
+offset_top = 62.0
+offset_right = 174.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("1_a2ivp")
+theme_override_font_sizes/font_size = 30
+text = "Abyssky's 2D Liquid Shader"
+underline = 1
+uri = "https://godotshaders.com/shader/2d-liquid-fill-inside-sphere-v2/"

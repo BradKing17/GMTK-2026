@@ -15,8 +15,6 @@ public partial class PlayerController : CharacterBody2D
     private Vector2 target;
     private bool canMove = true;
     private bool isAttacking = false;
-
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		AddToGroup("Player");
@@ -31,7 +29,6 @@ public partial class PlayerController : CharacterBody2D
 		canMove = true;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
 		//Attacking and moving logic
@@ -96,7 +93,6 @@ public partial class PlayerController : CharacterBody2D
 
 	public void OnOverlap(Node2D body)
 	{
-        Print(body);
 		if (body is BaseEnemy)
 		{
 			Print(health);

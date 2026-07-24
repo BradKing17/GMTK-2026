@@ -21,7 +21,7 @@ public partial class BaseEnemy : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if(maxDistanceToPlayer < Position.DistanceTo(player.Position))
+		if (maxDistanceToPlayer < Position.DistanceTo(player.Position))
 		{
 			Velocity = Position.DirectionTo(player.Position) * -Speed;
 		}
