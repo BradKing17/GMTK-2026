@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://bkxc4y2pf6ci2"]
+
+[ext_resource type="Texture2D" uid="uid://dtghqviceey6s" path="res://Assets/Art/bloodDrop.png" id="1_upxv2"]
+[ext_resource type="Script" uid="uid://bnpk7700cpls6" path="res://Scripts/Particles/BloodParticle.cs" id="2_ak2dk"]
+
+[sub_resource type="Curve" id="Curve_i5oj1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.35802472, 0.4716981), -4.73774, -4.73774, 0, 0, Vector2(0.4268078, 0), -3.1202824, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_o8864"]
+curve = SubResource("Curve_i5oj1")
+
+[sub_resource type="Gradient" id="Gradient_upxv2"]
+offsets = PackedFloat32Array(0.011342155, 0.60113424)
+colors = PackedColorArray(1, 1, 1, 1, 0.8260324, 0.78339547, 0.4336046, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a1nta"]
+gradient = SubResource("Gradient_upxv2")
+width = 858
+
+[sub_resource type="Curve" id="Curve_fj0eq"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.04043126), 0.0, 0.2218511, 0, 0, Vector2(1, 0.1940701), 0.4849415, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tms7s"]
+curve = SubResource("Curve_fj0eq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_guo2i"]
+particle_flag_disable_z = true
+direction = Vector3(10, -1, 0)
+initial_velocity_min = 59.199997
+initial_velocity_max = 76.799995
+gravity = Vector3(0, 150, 0)
+damping_min = 73.44
+damping_max = 73.44
+scale_min = 3.1999998
+scale_max = 3.1999998
+scale_over_velocity_max = 500.0
+scale_over_velocity_curve = SubResource("CurveTexture_tms7s")
+color = Color(0.95686275, 0, 0.011764706, 0.21960784)
+color_ramp = SubResource("GradientTexture1D_a1nta")
+alpha_curve = SubResource("CurveTexture_o8864")
+hue_variation_min = -0.020000022
+hue_variation_max = -2.2351742e-08
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 1
+sub_emitter_keep_velocity = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3piac"]
+particle_flag_disable_z = true
+direction = Vector3(10.745, -1, 0)
+initial_velocity_min = 54.149998
+initial_velocity_max = 680.89996
+gravity = Vector3(0, 150, 0)
+scale_min = 0.0
+scale_max = 0.29999998
+scale_over_velocity_min = 153.59999
+scale_over_velocity_max = 153.59999
+color = Color(0.7714044, 3.1814427e-05, 0.009013638, 0.7607843)
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1278433464]
+amount = 350
+texture = ExtResource("1_upxv2")
+lifetime = 6.0
+speed_scale = 7.52
+trail_enabled = true
+trail_lifetime = 1.2
+trail_sections = 16
+trail_section_subdivisions = 1024
+process_material = SubResource("ParticleProcessMaterial_guo2i")
+script = ExtResource("2_ak2dk")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=167323513]
+emitting = false
+amount = 62
+texture = ExtResource("1_upxv2")
+lifetime = 10.16
+one_shot = true
+speed_scale = 4.16
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.54
+process_material = SubResource("ParticleProcessMaterial_3piac")

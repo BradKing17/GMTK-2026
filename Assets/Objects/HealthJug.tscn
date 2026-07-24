@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dliwg584tna42" path="res://Scripts/Controllers/HealthController.cs" id="1_gwqy7"]
 [ext_resource type="Shader" uid="uid://c5mbs15ndg0yf" path="res://Assets/Shaders/Health.gdshader" id="2_hd5fr"]
 [ext_resource type="Texture2D" uid="uid://nruu7s0ldr2d" path="res://icon.svg" id="3_3piac"]
+[ext_resource type="PackedScene" uid="uid://bkxc4y2pf6ci2" path="res://Assets/Objects/DrainParticle.tscn" id="4_hd5fr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_12ciu"]
 shader = ExtResource("2_hd5fr")
@@ -15,10 +16,33 @@ shader_parameter/innerRingGlowColour = Color(0, 1, 1, 1)
 shader_parameter/fillcolour = Color(1, 1, 1, 1)
 shader_parameter/ringWidth = 0.15
 shader_parameter/innerCircleRadiusOffset = 0.0
-shader_parameter/fill_value = 0.0
+shader_parameter/fill_value = 0.550000026125
 
-[node name="HealthJug" type="Node2D" unique_id=49203889]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ja02"]
+size = Vector2(17, 87)
+
+[sub_resource type="Animation" id="Animation_3piac"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_hd5fr"]
+resource_name = "shake"
+length = 0.19999999999999998
+loop_mode = 2
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3piac"]
+_data = {
+&"RESET": SubResource("Animation_3piac"),
+&"shake": SubResource("Animation_hd5fr")
+}
+
+[node name="HealthJug" type="Node2D" unique_id=49203889 node_paths=PackedStringArray("bloodShader", "textLabel", "drainArea", "leakParent")]
 script = ExtResource("1_gwqy7")
+testing = true
+bloodShader = NodePath("Blood")
+textLabel = NodePath("LevelLabel")
+drainArea = NodePath("DrainSpawnArea")
+leakParent = NodePath("Leaks")
+packedParticle = ExtResource("4_hd5fr")
 
 [node name="Blood" type="Sprite2D" parent="." unique_id=714237609]
 material = SubResource("ShaderMaterial_12ciu")
@@ -38,3 +62,29 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0 ml"
 horizontal_alignment = 2
+
+[node name="Leaks" type="Node2D" parent="." unique_id=2012980742]
+
+[node name="DrainSpawnArea" type="Area2D" parent="." unique_id=1834081256]
+disable_mode = 1
+monitoring = false
+monitorable = false
+
+[node name="left" type="CollisionShape2D" parent="DrainSpawnArea" unique_id=1649491426]
+position = Vector2(-56, 20)
+shape = SubResource("RectangleShape2D_5ja02")
+disabled = true
+
+[node name="right" type="CollisionShape2D" parent="DrainSpawnArea" unique_id=1307002950]
+position = Vector2(56, 20)
+shape = SubResource("RectangleShape2D_5ja02")
+disabled = true
+
+[node name="DrainParticleTest" parent="." unique_id=6660087 instance=ExtResource("4_hd5fr")]
+visible = false
+position = Vector2(64, 45)
+speed_scale = 4.0
+visibility_rect = Rect2(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=433928313]
+libraries/ = SubResource("AnimationLibrary_3piac")
