@@ -22,10 +22,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite")]
+[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite", "healthController")]
 script = ExtResource("1_rpqav")
 moveSpeed = 100.0
 playerSprite = NodePath("AnimatedSprite2D")
+healthController = NodePath("HealthJug")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1721885316]
 

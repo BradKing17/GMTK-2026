@@ -9,11 +9,10 @@ public partial class PlayerController : CharacterBody2D
 		[Export] private float health = 5500.0f;
 		[Export] private float rateOfBloodLoss = 10.0f;
 		[Export] private int holes = 0;
-
 		[Export] private float MaxRadius = 500.0f;
 
 		[Export] private AnimatedSprite2D playerSprite;
-
+        [Export] private HealthController healthController;
 		private Vector2 target;
 		private bool canMove = true;
 		private bool isAttacking = false;
@@ -30,6 +29,7 @@ public partial class PlayerController : CharacterBody2D
 		Print("Game Started");
 		health = maxHealth;
 		holes = 1;
+        healthController.SpringLeak();
 		canMove = true;
 	}
 
@@ -42,7 +42,7 @@ public partial class PlayerController : CharacterBody2D
 			Velocity = Position.DirectionTo(target) * moveSpeed * 2;
 			if (Position.DistanceTo(target) > 20.0f)
 			{
-				bool collided =MoveAndSlide();
+				bool collided = MoveAndSlide();
 				if(collided)
 				{
 					Velocity = Vector2.Zero;
@@ -63,13 +63,11 @@ public partial class PlayerController : CharacterBody2D
 			MoveAndSlide();
 		}
 	
-	
-		
-		
 		//Health drain logic
 		if(holes > 0)
 		{
 			health -= (float)delta * holes * rateOfBloodLoss;
+            healthController.SetFillLevel(health);
 		}
 
 		if(health <= 0)
@@ -82,7 +80,6 @@ public partial class PlayerController : CharacterBody2D
 
  public override void _Input(InputEvent @event)
 	{
-		
 		if (@event.IsActionPressed("attack"))
 		{
 			isAttacking = true;
@@ -115,6 +112,7 @@ public partial class PlayerController : CharacterBody2D
 			{
 				health = maxHealth;
 			}
+            healthController.SetFillLevel(health);
 			Print(health);
 			body.QueueFree();
 		}
@@ -122,6 +120,7 @@ public partial class PlayerController : CharacterBody2D
 		if(body is Projectile)
 		{
 			holes++;
+            healthController.SpringLeak();
 			body.QueueFree();
 			Print(holes);
 		}
