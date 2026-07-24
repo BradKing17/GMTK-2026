@@ -1,6 +1,6 @@
 using Godot;
 using System;
-public partial class HealthController : Control
+public partial class HealthController : Node2D
 {
     [Export(PropertyHint.Range, "0,1")] public float fillValue = 0;
     [Export] private bool testing = false;
