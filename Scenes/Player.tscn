@@ -23,8 +23,6 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite", "healthController")]
-collision_layer = 2
-collision_mask = 2
 script = ExtResource("1_rpqav")
 moveSpeed = 100.0
 playerSprite = NodePath("AnimatedSprite2D")
@@ -41,12 +39,15 @@ sprite_frames = SubResource("SpriteFrames_8g2fy")
 animation = &"Default"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=236963478]
+position = Vector2(0, -1)
+collision_layer = 3
+collision_mask = 3
 
 [node name="OverlapShape" type="CollisionShape2D" parent="Area2D" unique_id=1936640181]
 shape = SubResource("CircleShape2D_s1t60")
 
 [node name="HealthJug" parent="." unique_id=49203889 instance=ExtResource("3_gntrk")]
-position = Vector2(436, -168)
+position = Vector2(385, -234)
 testing = false
 
 [connection signal="body_entered" from="Area2D" to="." method="OnOverlap"]
