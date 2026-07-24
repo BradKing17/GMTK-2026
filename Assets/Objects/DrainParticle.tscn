@@ -74,7 +74,7 @@ scale_over_velocity_min = 153.59999
 scale_over_velocity_max = 153.59999
 color = Color(0.7714044, 3.1814427e-05, 0.009013638, 0.7607843)
 
-[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1278433464]
+[node name="MainFlow" type="GPUParticles2D" unique_id=1278433464]
 amount = 350
 texture = ExtResource("1_upxv2")
 lifetime = 6.0
@@ -88,7 +88,7 @@ trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_guo2i")
 script = ExtResource("2_ak2dk")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=363109694]
+[node name="smallSquicks" type="GPUParticles2D" parent="." unique_id=363109694]
 show_behind_parent = true
 amount_ratio = 0.3
 texture = ExtResource("1_upxv2")
@@ -101,7 +101,8 @@ trail_enabled = true
 trail_lifetime = 0.54
 process_material = SubResource("ParticleProcessMaterial_upxv2")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=167323513]
+[node name="BigBackgroundBurst" type="GPUParticles2D" parent="." unique_id=167323513]
+visible = false
 emitting = false
 amount = 62
 texture = ExtResource("1_upxv2")

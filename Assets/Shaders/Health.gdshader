@@ -41,8 +41,7 @@ mat2 Get2DRotationMatrix(float angle) {
 
 void fragment() {
 	vec2 uv = ((UV / -0.48)) + vec2(1.038,1.038);
-    vec2 normalizedCenteredUV = (uv - 0.5) * 2.0;
-    float circleSDF = length(uv);
+    //vec2 normalizedCenteredUV = (uv - 0.5) * 2.0;
 	
     const float fillAnimationFrequency = 4.0;
     const float fillAnimationAmplitude = 0.05;
@@ -52,9 +51,7 @@ void fragment() {
     
     const float waveFrequency = 2.0;
     const float waveAmplitude = 0.05;
-    
-    //const float waveAnimation = 2.0;
-    
+	
     float frontWavePhase = (TIME * wave_speed) + uv.x;
     float backWavePhase = (TIME * -wave_speed) + uv.x;
         
@@ -82,10 +79,7 @@ void fragment() {
     float fillMask = 1.0 - (frontFill + backFill);
     float fill = frontFill + backFill;
     float mask = fill;
-    
     vec3 frontFillColour = mix(frontFillInnerColour, frontFillOuterColour, 0);
-    const vec3 specularColour = vec3(1.0, 1.0, 0.9);
-    const vec3 outerRingGlowColour = vec3(1.0, 0.8, 0.1);
              
     vec3 rgb =
         ((frontFill * frontFillColour) +
