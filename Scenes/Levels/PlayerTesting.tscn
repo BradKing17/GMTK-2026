@@ -13,7 +13,7 @@ player = NodePath("Player")
 position = Vector2(811, 194)
 
 [node name="Player" parent="." unique_id=1098916475 instance=ExtResource("1_dg17q")]
-position = Vector2(582, 339)
+position = Vector2(584, 339)
 moveSpeed = 400.0
 health = 100.0
 
