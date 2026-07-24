@@ -1,6 +1,6 @@
 using Godot;
 using System;
-public partial class HealthController : Node
+public partial class HealthController : Control
 {
     [Export(PropertyHint.Range, "0,1")] public float fillValue = 0;
     [Export] private bool testing = false;
@@ -12,9 +12,18 @@ public partial class HealthController : Node
     [Export] private PackedScene packedParticle;
     private Godot.Collections.Array<BloodParticle> leaks;
 
+    [Export] float shakeDuration = .5f;
+    [Export] float shakeAmount = 5f;
+    private float currentShake = 0;
+    private bool shake;
+    private Vector2 originalPosition;
     HealthController()
     {
         leaks = [];
+    }
+    public override void _EnterTree()
+    {
+        originalPosition = Position;
     }
     public override void _Ready()
     {
@@ -23,20 +32,24 @@ public partial class HealthController : Node
         textLabel ??= GetChild<RichTextLabel>(1);
         drainArea ??= GetChild<Area2D>(2);
         material.SetShaderParameter("fill_value", fillValue);
-        SlerpToFillLevel(fillValue, 1, 10f);
+        SlerpToFillLevel(fillValue, 75, 10f);
     }
     public void SetFillLevel(float fV)
     {
         material.SetShaderParameter("fill_value", fV);
-        textLabel.Text = $"{fV * 100} ml";
+        textLabel.Text = $"{fV} ml";
     }
     public void SlerpToFillLevel(float fromLevel, float destinationLevel, float t)
     {
         Tween tween = GetTree().CreateTween();
         tween.SetParallel(true);
-        tween.TweenMethod(Callable.From<int>(SetLabelText), fromLevel * 100, destinationLevel * 100, t);
-        tween.TweenProperty(material,"shader_parameter/fill_value", destinationLevel, t);
+        tween.TweenMethod(Callable.From<int>(SetLabelText), fromLevel, destinationLevel, t);
+        tween.TweenProperty(material,"shader_parameter/fill_value", destinationLevel / 100, t);
         tween.Chain();
+    }
+    private void setWaveSpeed(float speed, float t)
+    {
+        material.SetShaderParameter("wave_speed", speed);
     }
     public override void _Input(InputEvent @event)
     {
@@ -62,6 +75,8 @@ public partial class HealthController : Node
         leak.flipX = randomSide == 0;
         leakParent.AddChild(leak);
         leaks.Add(leak);
+        setWaveSpeed(leaks.Count, 2);
+        shake = true;
         leak.Position = PositionInRegion(drainArea.GetChildren()[randomSide] as CollisionShape2D);
     }
     private Vector2 PositionInRegion(CollisionShape2D spawnRegion)
@@ -77,6 +92,36 @@ public partial class HealthController : Node
         var r =  leaks.Count - 1 == 0 ? 0 : new RandomNumberGenerator().RandiRange(0, leaks.Count - 1);
         BloodParticle randomLeak = leaks[r];
         leaks.Remove(randomLeak);
+        setWaveSpeed(leaks.Count, 2);
         randomLeak.StopFlow();
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+        HandleShake(delta);
+        Vector2 allowance = new(5,5);
+        if (originalPosition - Position > allowance || Position - originalPosition > allowance)
+        {
+            Vector2 difference = originalPosition - Position;
+            this.Position += new Vector2(difference.X > 0 ? 1 : -1, difference.Y > 0 ? 1 : -1);
+        }
+    }
+
+    private void HandleShake(double delta)
+    {
+        if (currentShake == 0f && shake)
+        {
+            currentShake = shakeAmount;
+        }
+        currentShake -= shakeAmount * ToSingle(delta) / shakeDuration;
+        if (currentShake < 0f) { currentShake = 0; shake = false; }
+
+        this.Position = new Vector2(this.Position.X - new RandomNumberGenerator().RandfRange(-currentShake, currentShake), this.Position.Y - new RandomNumberGenerator().RandfRange(-currentShake, currentShake));
+    }
+
+    public static float ToSingle(double value)
+    {
+        return (float)value;
     }
 }

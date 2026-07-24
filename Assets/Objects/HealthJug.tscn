@@ -17,6 +17,7 @@ shader_parameter/fillcolour = Color(1, 1, 1, 1)
 shader_parameter/ringWidth = 0.15
 shader_parameter/innerCircleRadiusOffset = 0.0
 shader_parameter/fill_value = 0.550000026125
+shader_parameter/wave_speed = 2.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ja02"]
 size = Vector2(17, 87)
@@ -26,7 +27,7 @@ length = 0.001
 
 [sub_resource type="Animation" id="Animation_hd5fr"]
 resource_name = "shake"
-length = 0.19999999999999998
+length = 0.2
 loop_mode = 2
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3piac"]
@@ -35,7 +36,11 @@ _data = {
 &"shake": SubResource("Animation_hd5fr")
 }
 
-[node name="HealthJug" type="Node2D" unique_id=49203889 node_paths=PackedStringArray("bloodShader", "textLabel", "drainArea", "leakParent")]
+[node name="Node" type="Node" unique_id=1365276281]
+
+[node name="HealthJug" type="Control" parent="." unique_id=1072019858 node_paths=PackedStringArray("bloodShader", "textLabel", "drainArea", "leakParent")]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_gwqy7")
 testing = true
 bloodShader = NodePath("Blood")
@@ -44,11 +49,12 @@ drainArea = NodePath("DrainSpawnArea")
 leakParent = NodePath("Leaks")
 packedParticle = ExtResource("4_hd5fr")
 
-[node name="Blood" type="Sprite2D" parent="." unique_id=714237609]
+[node name="Blood" type="Sprite2D" parent="HealthJug" unique_id=714237609]
 material = SubResource("ShaderMaterial_12ciu")
 texture = ExtResource("3_3piac")
 
-[node name="LevelLabel" type="RichTextLabel" parent="." unique_id=942190167]
+[node name="LevelLabel" type="RichTextLabel" parent="HealthJug" unique_id=942190167]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -63,28 +69,28 @@ grow_vertical = 2
 text = "0 ml"
 horizontal_alignment = 2
 
-[node name="Leaks" type="Node2D" parent="." unique_id=2012980742]
+[node name="Leaks" type="Node2D" parent="HealthJug" unique_id=2012980742]
 
-[node name="DrainSpawnArea" type="Area2D" parent="." unique_id=1834081256]
+[node name="DrainSpawnArea" type="Area2D" parent="HealthJug" unique_id=1834081256]
 disable_mode = 1
 monitoring = false
 monitorable = false
 
-[node name="left" type="CollisionShape2D" parent="DrainSpawnArea" unique_id=1649491426]
+[node name="left" type="CollisionShape2D" parent="HealthJug/DrainSpawnArea" unique_id=1649491426]
 position = Vector2(-56, 20)
 shape = SubResource("RectangleShape2D_5ja02")
 disabled = true
 
-[node name="right" type="CollisionShape2D" parent="DrainSpawnArea" unique_id=1307002950]
+[node name="right" type="CollisionShape2D" parent="HealthJug/DrainSpawnArea" unique_id=1307002950]
 position = Vector2(56, 20)
 shape = SubResource("RectangleShape2D_5ja02")
 disabled = true
 
-[node name="DrainParticleTest" parent="." unique_id=6660087 instance=ExtResource("4_hd5fr")]
+[node name="DrainParticleTest" parent="HealthJug" unique_id=6660087 instance=ExtResource("4_hd5fr")]
 visible = false
 position = Vector2(64, 45)
 speed_scale = 4.0
 visibility_rect = Rect2(0, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=433928313]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HealthJug" unique_id=433928313]
 libraries/ = SubResource("AnimationLibrary_3piac")
