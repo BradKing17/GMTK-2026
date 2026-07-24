@@ -17,9 +17,55 @@ shader_parameter/fillcolour = Color(1, 1, 1, 1)
 shader_parameter/ringWidth = 0.15
 shader_parameter/innerCircleRadiusOffset = 0.0
 shader_parameter/fill_value = 0.550000026125
+shader_parameter/wave_speed = 2.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ja02"]
 size = Vector2(17, 87)
+
+[sub_resource type="Curve" id="Curve_i5oj1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.35802472, 0.4716981), -4.73774, -4.73774, 0, 0, Vector2(0.4268078, 0), -3.1202824, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_o8864"]
+curve = SubResource("Curve_i5oj1")
+
+[sub_resource type="Gradient" id="Gradient_upxv2"]
+offsets = PackedFloat32Array(0.011342155, 0.60113424)
+colors = PackedColorArray(1, 1, 1, 1, 0.8260324, 0.78339547, 0.4336046, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a1nta"]
+gradient = SubResource("Gradient_upxv2")
+width = 858
+
+[sub_resource type="Curve" id="Curve_fj0eq"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.04043126), 0.0, 0.2218511, 0, 0, Vector2(1, 0.1940701), 0.4849415, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tms7s"]
+curve = SubResource("Curve_fj0eq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hd5fr"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+direction = Vector3(10, -1, 0)
+initial_velocity_min = 59.199997
+initial_velocity_max = 76.799995
+gravity = Vector3(0, 150, 0)
+damping_min = 73.44
+damping_max = 73.44
+scale_min = 3.1999998
+scale_max = 3.1999998
+scale_over_velocity_max = 500.0
+scale_over_velocity_curve = SubResource("CurveTexture_tms7s")
+color = Color(0.95686275, 0, 0.011764706, 0.21960784)
+color_ramp = SubResource("GradientTexture1D_a1nta")
+alpha_curve = SubResource("CurveTexture_o8864")
+hue_variation_min = -0.020000022
+hue_variation_max = -2.2351742e-08
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 1
+sub_emitter_keep_velocity = true
 
 [sub_resource type="Animation" id="Animation_3piac"]
 length = 0.001
@@ -35,8 +81,7 @@ _data = {
 &"shake": SubResource("Animation_hd5fr")
 }
 
-[node name="HealthJug" type="Node2D" unique_id=49203889 node_paths=PackedStringArray("bloodShader", "textLabel", "drainArea", "leakParent")]
-position = Vector2(582, 270)
+[node name="HealthJug" type="Node2D" unique_id=1277190329 node_paths=PackedStringArray("bloodShader", "textLabel", "drainArea", "leakParent")]
 script = ExtResource("1_gwqy7")
 testing = true
 bloodShader = NodePath("Blood")
@@ -87,6 +132,7 @@ visible = false
 position = Vector2(64, 45)
 speed_scale = 4.0
 visibility_rect = Rect2(0, 0, 0, 0)
+process_material = SubResource("ParticleProcessMaterial_hd5fr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=433928313]
 libraries/ = SubResource("AnimationLibrary_3piac")
