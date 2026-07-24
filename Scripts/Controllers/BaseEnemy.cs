@@ -16,13 +16,11 @@ public partial class BaseEnemy : CharacterBody2D
 	public override void _Ready()
 	{
 		player = GetTree().GetFirstNodeInGroup("Player") as PlayerController;
-
 		timeSinceLastShot = fireRate;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-
 		if(maxDistanceToPlayer < Position.DistanceTo(player.Position))
 		{
 			Velocity = Position.DirectionTo(player.Position) * -Speed;
@@ -36,7 +34,7 @@ public partial class BaseEnemy : CharacterBody2D
             Print("Firing projectile");
 			// Fire projectile
 			var projectile = GD.Load<PackedScene>("res://Scenes/Projectile.tscn").Instantiate<Projectile>();
-			projectile.Position = Position;
+			projectile.GlobalPosition = GlobalPosition;
 			GetTree().CurrentScene.AddChild(projectile);
 			timeSinceLastShot = fireRate; // Reset fire rate
 		}

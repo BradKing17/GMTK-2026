@@ -47,5 +47,6 @@ shape = SubResource("CircleShape2D_s1t60")
 
 [node name="HealthJug" parent="." unique_id=49203889 instance=ExtResource("3_gntrk")]
 position = Vector2(436, -168)
+testing = false
 
 [connection signal="body_entered" from="Area2D" to="." method="OnOverlap"]

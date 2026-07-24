@@ -32,12 +32,16 @@ public partial class HealthController : Node2D
         textLabel ??= GetChild<RichTextLabel>(1);
         drainArea ??= GetChild<Area2D>(2);
         material.SetShaderParameter("fill_value", fillValue);
-        SlerpToFillLevel(fillValue, 75, 10f);
+        if (testing)
+        {
+            SlerpToFillLevel(fillValue, 75, 10f);
+        }
     }
     public void SetFillLevel(float fV)
     {
-        material.SetShaderParameter("fill_value", fV);
-        textLabel.Text = $"{fV} ml";
+        textLabel.Text = $"{(int)fV} ml";
+        if( fV > 1) { fV = fV/ 5500 * 100; }
+        material.SetShaderParameter("fill_value", fV / 100);
     }
     public void SlerpToFillLevel(float fromLevel, float destinationLevel, float t)
     {

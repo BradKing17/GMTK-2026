@@ -4,18 +4,17 @@ using static Godot.GD;
 
 public partial class PlayerController : CharacterBody2D
 {
-		[Export] private float moveSpeed = 5.0f;
-		[Export] private float maxHealth = 5500.0f;
-		[Export] private float health = 5500.0f;
-		[Export] private float rateOfBloodLoss = 10.0f;
-		[Export] private int holes = 0;
-		[Export] private float MaxRadius = 500.0f;
-
-		[Export] private AnimatedSprite2D playerSprite;
-        [Export] private HealthController healthController;
-		private Vector2 target;
-		private bool canMove = true;
-		private bool isAttacking = false;
+    [Export] private float moveSpeed = 5.0f;
+    [Export] private float maxHealth = 5500.0f;
+    [Export] private float health = 5500.0f;
+    [Export] private float rateOfBloodLoss = 10.0f;
+    [Export] private int holes = 0;
+    [Export] private float MaxRadius = 500.0f;
+    [Export] private AnimatedSprite2D playerSprite;
+    [Export] private HealthController healthController;
+    private Vector2 target;
+    private bool canMove = true;
+    private bool isAttacking = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -37,13 +36,13 @@ public partial class PlayerController : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		//Attacking and moving logic
-		if(isAttacking)
+		if (isAttacking)
 		{
 			Velocity = Position.DirectionTo(target) * moveSpeed * 2;
 			if (Position.DistanceTo(target) > 20.0f)
 			{
 				bool collided = MoveAndSlide();
-				if(collided)
+				if (collided)
 				{
 					Velocity = Vector2.Zero;
 					isAttacking = false;
@@ -64,38 +63,33 @@ public partial class PlayerController : CharacterBody2D
 		}
 	
 		//Health drain logic
-		if(holes > 0)
+		if (holes > 0)
 		{
 			health -= (float)delta * holes * rateOfBloodLoss;
             healthController.SetFillLevel(health);
 		}
-
-		if(health <= 0)
+		if (health <= 0)
 		{
 			Print("You Died");
 			GetTree().Quit();
 		}
-
 	}
 
- public override void _Input(InputEvent @event)
+    public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("attack"))
 		{
 			isAttacking = true;
 			Vector2 clickPosition = GetGlobalMousePosition();
-			 Vector2 offset = clickPosition - GlobalPosition;
-		   // float distance = offset.Length();
-
+            Vector2 offset = clickPosition - GlobalPosition;
 			target = GlobalPosition + (offset.Normalized() * MaxRadius);
-
 			playerSprite.Frame = 1;
 		}
 	}
 
 	public void GetInput()
 	{
-		if(!isAttacking)
+		if (!isAttacking)
 		{
 			Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 			Velocity = inputDirection * moveSpeed;
@@ -104,7 +98,8 @@ public partial class PlayerController : CharacterBody2D
 
 	public void OnOverlap(Node2D body)
 	{
-		if(body is BaseEnemy)
+        Print(body);
+		if (body is BaseEnemy)
 		{
 			Print(health);
 			health += 1000.0f;
@@ -114,15 +109,15 @@ public partial class PlayerController : CharacterBody2D
 			}
             healthController.SetFillLevel(health);
 			Print(health);
+            healthController.SpringLeak();
 			body.QueueFree();
 		}
-
-		if(body is Projectile)
+        else if (body is Projectile)
 		{
 			holes++;
             healthController.SpringLeak();
 			body.QueueFree();
-			Print(holes);
+			Print($"hit {holes}");
 		}
 	}
 
