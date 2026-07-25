@@ -6,10 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cg273nyklkupw" path="res://Scenes/TestObstacle.tscn" id="2_xk2ot"]
 [ext_resource type="PackedScene" uid="uid://50y0e1gwhp37" path="res://Scenes/Enemy.tscn" id="3_4sljb"]
 [ext_resource type="PackedScene" uid="uid://crtjdpg7blmug" path="res://Scenes/FullAutoEnemy.tscn" id="3_tqebw"]
+[ext_resource type="AudioStream" uid="uid://b8ooq7um8u668" path="res://Assets/Audio/Power Projection_loop.wav" id="7_ug5at"]
 
 [node name="MainLevel" type="Node2D" unique_id=974365681 node_paths=PackedStringArray("player")]
 script = ExtResource("1_6dbt5")
 player = NodePath("Player")
+enemySpawnRate = 2.0
+corkSpawnRate = 5.0
 enemies = Array[PackedScene]([ExtResource("3_4sljb"), ExtResource("3_tqebw")])
 
 [node name="Floor" type="TextureRect" parent="." unique_id=1055928065]
@@ -44,3 +47,10 @@ position = Vector2(1524, 719)
 
 [node name="Obstacle12" parent="." unique_id=1578120979 instance=ExtResource("2_xk2ot")]
 position = Vector2(-736, 1499)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1146915420]
+stream = ExtResource("7_ug5at")
+volume_db = -30.21
+autoplay = true
+max_distance = 100000.0
+attenuation = 0.0037731833
