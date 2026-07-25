@@ -9,15 +9,29 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private float health = 5500.0f;
 	[Export] private float rateOfBloodLoss = 10.0f;
 	[Export] private int holes = 0;
-	[Export] private float MaxRadius = 500.0f;
+
+	// Lunge variables
+	[Export] private float MaxLungeRadius = 500.0f;
 	[Export] private float lungeCD = 1.0f;
 	[Export] private float timeSinceLastLunge = 0.0f;
 	[Export] private bool canAttack = true;
+	private bool isAttacking = false;
+	private Vector2 lungeTarget;
+
+	// Dodge variables
+	[Export] private float MaxDodgeRadius = 300.0f;
+	[Export] private float dodgeCD = 1.0f;
+	[Export] private float timeSinceLastDodge = 0.0f;
+	[Export] private bool canDodge = true;
+
+	private bool isDodging = false;
+	private Vector2 dodgeTarget;
+
 	[Export] private AnimatedSprite2D playerSprite;
 	[Export] private HealthController healthController;
-	private Vector2 target;
+
 	private bool canMove = true;
-	private bool isAttacking = false;
+
 	public override void _Ready()
 	{
 		AddToGroup("Player");
@@ -39,8 +53,8 @@ public partial class PlayerController : CharacterBody2D
 		{
 			canAttack = false;
 			timeSinceLastLunge = lungeCD;
-			Velocity = Position.DirectionTo(target) * moveSpeed * 2;
-			if (Position.DistanceTo(target) > 20.0f)
+			Velocity = Position.DirectionTo(lungeTarget) * moveSpeed * 2;
+			if (Position.DistanceTo(lungeTarget) > 20.0f)
 			{
 				bool collided = MoveAndSlide();
 				if (collided)
@@ -59,13 +73,47 @@ public partial class PlayerController : CharacterBody2D
 			}
 			else
 			{
-			
 				isAttacking = false;
 				playerSprite.Frame = 0;
 			}
+		}
+		else if (isDodging)
+		{
+			canDodge = false;
+			this.CollisionLayer = 0;
+			this.CollisionMask = 0; // Disable collision with enemies and projectiles
+			timeSinceLastDodge = dodgeCD;
+			Velocity = Position.DirectionTo(dodgeTarget) * moveSpeed * 2;
+			if (Position.DistanceTo(dodgeTarget) > 20.0f)
+			{
+				bool collided = MoveAndSlide();
+				if (collided)
+				{
+					if(collided && GetSlideCollision(0).GetCollider() is Projectile)
+					{
+						Print("Collided with projectile");
+					}
+					else
+					{
+						Velocity = Vector2.Zero;
+						isDodging = false;
+						playerSprite.Frame = 0;
+						this.CollisionLayer = 1;
+						this.CollisionMask = 1; // Re-enable collision with enemies and projectiles
+					}
+				}
+			}
+			else
+			{
+			
+				isDodging = false;
+				playerSprite.Frame = 0;
+				this.CollisionLayer = 1;
+				this.CollisionMask = 1; 
+			}
 
 		}
-		
+
 		else
 		{
 			GetInput();
@@ -85,6 +133,17 @@ public partial class PlayerController : CharacterBody2D
 			timeSinceLastLunge = lungeCD;
 		}
 	
+		if(!canDodge)
+		{
+			timeSinceLastDodge -= (float)delta;
+		}
+
+		if(timeSinceLastDodge <= 0.0f)
+		{
+			Print("Dodge ready");
+			canDodge = true;
+			timeSinceLastDodge = dodgeCD;
+		}
 		//Health drain logic
 		if (holes > 0)
 		{
@@ -102,17 +161,33 @@ public partial class PlayerController : CharacterBody2D
 	{
 		if (@event.IsActionPressed("attack"))
 		{
-			if(canAttack)
+			if(canAttack && !isDodging)
 			{
 				isAttacking = true;
 				Vector2 clickPosition = GetGlobalMousePosition();
 				Vector2 offset = clickPosition - GlobalPosition;
-				target = GlobalPosition + (offset.Normalized() * MaxRadius);
+				lungeTarget = GlobalPosition + (offset.Normalized() * MaxLungeRadius);
 				playerSprite.Frame = 1;
 			}
 			else
 			{
 				Print("Lunge on cooldown");
+			}
+		}
+
+		if (@event.IsActionPressed("dodge"))
+		{
+			if(canDodge && !isAttacking)
+			{
+				isDodging = true;
+				Vector2 clickPosition = GetGlobalMousePosition();
+				Vector2 offset = clickPosition - GlobalPosition;
+				dodgeTarget = GlobalPosition + (offset.Normalized() * MaxDodgeRadius);
+				playerSprite.Frame = 2;
+			}
+			else
+			{
+				Print("Dodge on cooldown");
 			}
 			
 		}
@@ -147,10 +222,13 @@ public partial class PlayerController : CharacterBody2D
 		}
 		else if (body is Projectile)
 		{
-			holes++;
-			healthController.SpringLeak();
-			body.QueueFree();
-			Print($"hit {holes}");
+			if(!isDodging)
+			{
+				holes++;
+				healthController.SpringLeak();
+				body.QueueFree();
+				Print($"hit {holes}");
+			}
 		}
 		else if (body is Cork)
 		{
