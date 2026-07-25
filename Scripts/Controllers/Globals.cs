@@ -9,9 +9,11 @@ public partial class Globals : Node2D
 	CharacterBody2D player;
 	float score = 0.0f;
 
-	PackedScene corkScene = GD.Load<PackedScene>("res://Scenes/Cork.tscn");
+	[Export]PackedScene corkScene = GD.Load<PackedScene>("res://Scenes/Cork.tscn");
 
-	float spawnRate = 4.0f;
+	float enemySpawnRate = 4.0f;
+
+	float corkSpawnRate = 15.0f;
 
 
 	[Export]  Godot.Collections.Array<PackedScene> enemies = new Godot.Collections.Array<PackedScene>();
@@ -25,12 +27,20 @@ public partial class Globals : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		spawnRate -= (float)delta;
-		if(spawnRate <= 0.0f)
+		enemySpawnRate -= (float)delta;
+		if(enemySpawnRate <= 0.0f)
 		{
 			Print("Spawning enemy");
 			SpawnEnemy();
-			spawnRate = 4.0f;
+			enemySpawnRate = 4.0f;
+		}
+
+		corkSpawnRate -= (float)delta;
+		if(corkSpawnRate <= 0.0f)
+		{
+			Print("Spawning cork");
+			SpawnCork();
+			corkSpawnRate = 15.0f;
 		}
 	}
 
@@ -44,8 +54,7 @@ public partial class Globals : Node2D
 
 		public void SpawnCork()
 	{
-		
-		var cork = corkScene.Instantiate<CharacterBody2D>();
+		var cork = corkScene.Instantiate<StaticBody2D>();
 		cork.Position = new Vector2(player.Position.X + GD.RandRange(-500, 500), player.Position.Y + GD.RandRange(-500, 500));
 		GetTree().CurrentScene.AddChild(cork);
 	}

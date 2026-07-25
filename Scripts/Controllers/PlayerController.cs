@@ -53,7 +53,7 @@ public partial class PlayerController : CharacterBody2D
 		{
 			canAttack = false;
 			timeSinceLastLunge = lungeCD;
-			Velocity = Position.DirectionTo(lungeTarget) * moveSpeed * 2;
+			Velocity = Position.DirectionTo(lungeTarget) * moveSpeed * 3;
 			if (Position.DistanceTo(lungeTarget) > 20.0f)
 			{
 				bool collided = MoveAndSlide();
