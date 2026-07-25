@@ -23,6 +23,8 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite")]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_rpqav")
 moveSpeed = 100.0
 playerSprite = NodePath("AnimatedSprite2D")

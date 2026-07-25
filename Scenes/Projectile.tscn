@@ -7,7 +7,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1t60"]
 
-[node name="Node2D" type="Area2D" unique_id=1809475923]
+[node name="Node2D" type="StaticBody2D" unique_id=1958543956]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_k1cl8")

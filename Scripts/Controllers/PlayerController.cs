@@ -121,6 +121,7 @@ public partial class PlayerController : CharacterBody2D
 
 		if(body is Projectile)
 		{
+			Print("Hit by projectile");
 			holes++;
 			body.QueueFree();
 			Print(holes);
