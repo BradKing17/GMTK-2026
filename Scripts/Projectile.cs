@@ -5,7 +5,7 @@ public partial class Projectile : StaticBody2D
 {
 	private PlayerController player;
 	private Vector2 target;
-	private const float Speed = 1000.0f;
+	public float Speed { get; set; } = 300.0f;
 	public override void _Ready()
 	{
 		player = GetTree().GetFirstNodeInGroup("Player") as PlayerController;

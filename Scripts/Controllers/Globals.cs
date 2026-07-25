@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using static Godot.GD;
 
 public partial class Globals : Node2D
@@ -8,9 +9,12 @@ public partial class Globals : Node2D
 	CharacterBody2D player;
 	float score = 0.0f;
 
-	PackedScene enemyScene = GD.Load<PackedScene>("res://Scenes/Enemy.tscn");
+	//PackedScene enemyScene = GD.Load<PackedScene>("res://Scenes/Enemy.tscn");
 
 	float spawnRate = 4.0f;
+
+
+	[Export]  Godot.Collections.Array<PackedScene> enemies = new Godot.Collections.Array<PackedScene>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _EnterTree()
@@ -32,6 +36,7 @@ public partial class Globals : Node2D
 
 	public void SpawnEnemy()
 	{
+		var enemyScene = enemies.PickRandom();
 		var enemy = enemyScene.Instantiate<CharacterBody2D>();
 		enemy.Position = new Vector2(player.Position.X + GD.RandRange(-500, 500), player.Position.Y + GD.RandRange(-500, 500));
 		GetTree().CurrentScene.AddChild(enemy);

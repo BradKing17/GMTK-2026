@@ -5,10 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://u40qd5yaacsl" path="res://Assets/Art/floor texture.png" id="2_2u33t"]
 [ext_resource type="PackedScene" uid="uid://cg273nyklkupw" path="res://Scenes/TestObstacle.tscn" id="2_xk2ot"]
 [ext_resource type="PackedScene" uid="uid://50y0e1gwhp37" path="res://Scenes/Enemy.tscn" id="3_4sljb"]
+[ext_resource type="PackedScene" uid="uid://crtjdpg7blmug" path="res://Scenes/FullAutoEnemy.tscn" id="3_tqebw"]
 
 [node name="MainLevel" type="Node2D" unique_id=974365681 node_paths=PackedStringArray("player")]
 script = ExtResource("1_6dbt5")
 player = NodePath("Player")
+enemies = Array[PackedScene]([ExtResource("3_4sljb"), ExtResource("3_tqebw")])
 
 [node name="Floor" type="TextureRect" parent="." unique_id=1055928065]
 offset_left = -1959.0

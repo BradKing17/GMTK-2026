@@ -1,13 +1,13 @@
-[gd_scene format=3 uid="uid://50y0e1gwhp37"]
+[gd_scene format=3 uid="uid://crtjdpg7blmug"]
 
-[ext_resource type="Texture2D" uid="uid://c5xw0mwuq2l5v" path="res://Assets/Art/enemy.png" id="1_m1htj"]
-[ext_resource type="Script" uid="uid://dj7no23s10bql" path="res://Scripts/Controllers/BaseEnemy.cs" id="1_wovta"]
+[ext_resource type="Script" uid="uid://dj7no23s10bql" path="res://Scripts/Controllers/BaseEnemy.cs" id="1_cdii2"]
+[ext_resource type="Texture2D" uid="uid://c5xw0mwuq2l5v" path="res://Assets/Art/enemy.png" id="2_dp2k2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xeo28"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_m1htj")
+"texture": ExtResource("2_dp2k2")
 }],
 "loop": 1,
 "name": &"Default",
@@ -20,14 +20,14 @@ radius = 51.0392
 [node name="Enemy" type="CharacterBody2D" unique_id=2055579222]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_wovta")
+script = ExtResource("1_cdii2")
 minDistanceToPlayer = 500.0
 maxDistanceToPlayer = 700.0
-fireRate = 4.0
+fireRate = 0.5
 projectileSpeed = 1000.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=193133487]
-scale = Vector2(0.108505554, 0.104299374)
+scale = Vector2(-0.109, -0.104)
 sprite_frames = SubResource("SpriteFrames_xeo28")
 animation = &"Default"
 

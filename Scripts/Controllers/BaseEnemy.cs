@@ -10,9 +10,12 @@ public partial class BaseEnemy : CharacterBody2D
 	[Export] public float maxDistanceToPlayer = 500.0f;
 	
 	[Export] public float fireRate = 1.0f;
+	[Export] public float projectileSpeed = 300.0f;
 	private float timeSinceLastShot = 0.0f;
 
 	[Export] public PlayerController player;
+
+	[Export] public float experienceValue = 10.0f;
 
 	public override void _Ready()
 	{
@@ -42,6 +45,7 @@ public partial class BaseEnemy : CharacterBody2D
 			var projectile = GD.Load<PackedScene>("res://Scenes/Projectile.tscn").Instantiate<Projectile>();
 			projectile.GlobalPosition = GlobalPosition;
 			GetTree().CurrentScene.AddChild(projectile);
+			projectile.Speed = 300.0f;
 			timeSinceLastShot = fireRate; // Reset fire rate
 		}
 	}
