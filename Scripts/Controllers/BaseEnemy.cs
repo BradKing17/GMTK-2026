@@ -6,7 +6,8 @@ public partial class BaseEnemy : CharacterBody2D
 {
 	public const float Speed = 100.0f;
 	
-	public float maxDistanceToPlayer = 100.0f;
+	[Export] public float minDistanceToPlayer = 100.0f;
+	[Export] public float maxDistanceToPlayer = 500.0f;
 	
 	[Export] public float fireRate = 1.0f;
 	private float timeSinceLastShot = 0.0f;
@@ -22,9 +23,13 @@ public partial class BaseEnemy : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (maxDistanceToPlayer < Position.DistanceTo(player.Position))
+		if (Position.DistanceTo(player.Position) < minDistanceToPlayer)
 		{
 			Velocity = Position.DirectionTo(player.Position) * -Speed;
+		}
+		else if (Position.DistanceTo(player.Position) > maxDistanceToPlayer)
+		{
+			Velocity = Position.DirectionTo(player.Position) * Speed;
 		}
 		
 		MoveAndSlide();

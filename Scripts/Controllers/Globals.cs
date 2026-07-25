@@ -33,7 +33,7 @@ public partial class Globals : Node2D
 	public void SpawnEnemy()
 	{
 		var enemy = enemyScene.Instantiate<CharacterBody2D>();
-		enemy.Position = new Vector2(GD.RandRange(0, 1920), GD.RandRange(0, 1080));
+		enemy.Position = new Vector2(player.Position.X + GD.RandRange(-500, 500), player.Position.Y + GD.RandRange(-500, 500));
 		GetTree().CurrentScene.AddChild(enemy);
 	}
 }

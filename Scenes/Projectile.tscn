@@ -8,13 +8,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1t60"]
 
 [node name="Node2D" type="StaticBody2D" unique_id=2030324582]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_k1cl8")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=486062375]
 rotation = 3.1415925
-scale = Vector2(98.78, 100)
+scale = Vector2(17.870865, 19.090895)
 mesh = SubResource("QuadMesh_6dbt5")
 texture = ExtResource("2_y0kec")
 

@@ -21,6 +21,8 @@ radius = 51.0392
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_wovta")
+minDistanceToPlayer = 500.0
+maxDistanceToPlayer = 700.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=193133487]
 scale = Vector2(0.108505554, 0.104299374)

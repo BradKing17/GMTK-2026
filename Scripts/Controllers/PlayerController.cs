@@ -10,6 +10,9 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private float rateOfBloodLoss = 10.0f;
 	[Export] private int holes = 0;
 	[Export] private float MaxRadius = 500.0f;
+	[Export] private float lungeCD = 1.0f;
+	[Export] private float timeSinceLastLunge = 0.0f;
+	[Export] private bool canAttack = true;
 	[Export] private AnimatedSprite2D playerSprite;
 	[Export] private HealthController healthController;
 	private Vector2 target;
@@ -34,27 +37,52 @@ public partial class PlayerController : CharacterBody2D
 		//Attacking and moving logic
 		if (isAttacking)
 		{
+			canAttack = false;
+			timeSinceLastLunge = lungeCD;
 			Velocity = Position.DirectionTo(target) * moveSpeed * 2;
 			if (Position.DistanceTo(target) > 20.0f)
 			{
 				bool collided = MoveAndSlide();
 				if (collided)
 				{
-					Velocity = Vector2.Zero;
-					isAttacking = false;
-					playerSprite.Frame = 0;
+					if(collided && GetSlideCollision(0).GetCollider() is Projectile)
+					{
+						Print("Collided with projectile");
+					}
+					else
+					{
+						Velocity = Vector2.Zero;
+						isAttacking = false;
+						playerSprite.Frame = 0;
+					}
 				}
 			}
 			else
 			{
+			
 				isAttacking = false;
 				playerSprite.Frame = 0;
 			}
+
 		}
+		
 		else
 		{
 			GetInput();
 			MoveAndSlide();
+		}
+
+		//Reset lunge cooldown
+		if(!canAttack)
+		{
+			timeSinceLastLunge -= (float)delta;
+		}
+
+		if(timeSinceLastLunge <= 0.0f)
+		{
+			Print("Lunge ready");
+			canAttack = true;
+			timeSinceLastLunge = lungeCD;
 		}
 	
 		//Health drain logic
@@ -74,11 +102,19 @@ public partial class PlayerController : CharacterBody2D
 	{
 		if (@event.IsActionPressed("attack"))
 		{
-			isAttacking = true;
-			Vector2 clickPosition = GetGlobalMousePosition();
-			Vector2 offset = clickPosition - GlobalPosition;
-			target = GlobalPosition + (offset.Normalized() * MaxRadius);
-			playerSprite.Frame = 1;
+			if(canAttack)
+			{
+				isAttacking = true;
+				Vector2 clickPosition = GetGlobalMousePosition();
+				Vector2 offset = clickPosition - GlobalPosition;
+				target = GlobalPosition + (offset.Normalized() * MaxRadius);
+				playerSprite.Frame = 1;
+			}
+			else
+			{
+				Print("Lunge on cooldown");
+			}
+			
 		}
 	}
 
