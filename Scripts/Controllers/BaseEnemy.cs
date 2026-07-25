@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using static Godot.GD;
+using static Godot.GD;
 
 public partial class BaseEnemy : CharacterBody2D
 {
@@ -18,12 +19,12 @@ public partial class BaseEnemy : CharacterBody2D
 		player = GetTree().GetFirstNodeInGroup("Player") as PlayerController;
 
 		timeSinceLastShot = fireRate;
+		timeSinceLastShot = fireRate;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-
-		if(maxDistanceToPlayer < Position.DistanceTo(player.Position))
+		if (maxDistanceToPlayer < Position.DistanceTo(player.Position))
 		{
 			Velocity = Position.DirectionTo(player.Position) * -Speed;
 		}
@@ -36,7 +37,7 @@ public partial class BaseEnemy : CharacterBody2D
             Print("Firing projectile");
 			// Fire projectile
 			var projectile = GD.Load<PackedScene>("res://Scenes/Projectile.tscn").Instantiate<Projectile>();
-			projectile.Position = Position;
+			projectile.GlobalPosition = GlobalPosition;
 			GetTree().CurrentScene.AddChild(projectile);
 			timeSinceLastShot = fireRate; // Reset fire rate
 		}

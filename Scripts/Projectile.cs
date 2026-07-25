@@ -1,24 +1,18 @@
 using Godot;
 using System;
-using static Godot.GD;
 
 public partial class Projectile : StaticBody2D
 {
 	private PlayerController player;
-
 	private Vector2 target;
-	private const float Speed = 100.0f;
-	// Called when the node enters the scene tree for the first time.
+	private const float Speed = 1000.0f;
 	public override void _Ready()
 	{
 		player = GetTree().GetFirstNodeInGroup("Player") as PlayerController;
-		target = player.GlobalPosition;
-		Print(target);
+		target = (GlobalPosition - player.GlobalPosition).Normalized();
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		GlobalPosition += target * Speed * (float)delta;
+		GlobalPosition -= target * Speed * (float)delta;
 	}
 }
