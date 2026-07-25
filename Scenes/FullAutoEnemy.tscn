@@ -24,7 +24,7 @@ script = ExtResource("1_cdii2")
 minDistanceToPlayer = 500.0
 maxDistanceToPlayer = 700.0
 fireRate = 0.5
-projectileSpeed = 1000.0
+projectileSpeed = 1500.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=193133487]
 scale = Vector2(-0.109, -0.104)
