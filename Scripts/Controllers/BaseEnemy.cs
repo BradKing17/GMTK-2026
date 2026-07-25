@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using static Godot.GD;
-using static Godot.GD;
 
 public partial class BaseEnemy : CharacterBody2D
 {
@@ -18,7 +17,6 @@ public partial class BaseEnemy : CharacterBody2D
 	{
 		player = GetTree().GetFirstNodeInGroup("Player") as PlayerController;
 
-		timeSinceLastShot = fireRate;
 		timeSinceLastShot = fireRate;
 	}
 

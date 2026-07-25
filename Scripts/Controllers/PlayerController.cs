@@ -4,17 +4,17 @@ using static Godot.GD;
 
 public partial class PlayerController : CharacterBody2D
 {
-    [Export] private float moveSpeed = 5.0f;
-    [Export] private float maxHealth = 5500.0f;
-    [Export] private float health = 5500.0f;
-    [Export] private float rateOfBloodLoss = 10.0f;
-    [Export] private int holes = 0;
-    [Export] private float MaxRadius = 500.0f;
-    [Export] private AnimatedSprite2D playerSprite;
-    [Export] private HealthController healthController;
-    private Vector2 target;
-    private bool canMove = true;
-    private bool isAttacking = false;
+	[Export] private float moveSpeed = 5.0f;
+	[Export] private float maxHealth = 5500.0f;
+	[Export] private float health = 5500.0f;
+	[Export] private float rateOfBloodLoss = 10.0f;
+	[Export] private int holes = 0;
+	[Export] private float MaxRadius = 500.0f;
+	[Export] private AnimatedSprite2D playerSprite;
+	[Export] private HealthController healthController;
+	private Vector2 target;
+	private bool canMove = true;
+	private bool isAttacking = false;
 	public override void _Ready()
 	{
 		AddToGroup("Player");
@@ -25,7 +25,7 @@ public partial class PlayerController : CharacterBody2D
 		Print("Game Started");
 		health = maxHealth;
 		holes = 1;
-        healthController.SpringLeak();
+		healthController.SpringLeak();
 		canMove = true;
 	}
 
@@ -61,7 +61,7 @@ public partial class PlayerController : CharacterBody2D
 		if (holes > 0)
 		{
 			health -= (float)delta * holes * rateOfBloodLoss;
-            healthController.SetFillLevel(health);
+			healthController.SetFillLevel(health);
 		}
 		if (health <= 0)
 		{
@@ -70,13 +70,13 @@ public partial class PlayerController : CharacterBody2D
 		}
 	}
 
-    public override void _Input(InputEvent @event)
+	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("attack"))
 		{
 			isAttacking = true;
 			Vector2 clickPosition = GetGlobalMousePosition();
-            Vector2 offset = clickPosition - GlobalPosition;
+			Vector2 offset = clickPosition - GlobalPosition;
 			target = GlobalPosition + (offset.Normalized() * MaxRadius);
 			playerSprite.Frame = 1;
 		}
@@ -95,22 +95,25 @@ public partial class PlayerController : CharacterBody2D
 	{
 		if (body is BaseEnemy)
 		{
-			Print(health);
-			health += 1000.0f;
-			if (health > maxHealth)
+			if(isAttacking)
 			{
-				health = maxHealth;
-			}
+				Print(health);
+				health += 1000.0f;
+				if (health > maxHealth)
+				{
+					health = maxHealth;
+				}
 
-            healthController.SetFillLevel(health);
-			Print(health);
-            healthController.SpringLeak();
-			body.QueueFree();
+				healthController.SetFillLevel(health);
+				Print(health);
+				healthController.SpringLeak();
+				body.QueueFree();
+			}
 		}
-        else if (body is Projectile)
+		else if (body is Projectile)
 		{
 			holes++;
-            healthController.SpringLeak();
+			healthController.SpringLeak();
 			body.QueueFree();
 			Print($"hit {holes}");
 		}

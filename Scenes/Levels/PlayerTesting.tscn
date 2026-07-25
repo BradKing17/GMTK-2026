@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://ce56x77qgr2up"]
 
-[ext_resource type="Script" uid="uid://cjlhvnif3xkmr" path="res://Scenes/Levels/Globals.cs" id="1_6dbt5"]
+[ext_resource type="Script" uid="uid://cjlhvnif3xkmr" path="res://Scripts/Controllers/Globals.cs" id="1_6dbt5"]
 [ext_resource type="PackedScene" uid="uid://oqh5oxx1mkyn" path="res://Scenes/Player.tscn" id="1_dg17q"]
+[ext_resource type="Texture2D" uid="uid://u40qd5yaacsl" path="res://Assets/Art/floor texture.png" id="2_2u33t"]
 [ext_resource type="PackedScene" uid="uid://cg273nyklkupw" path="res://Scenes/TestObstacle.tscn" id="2_xk2ot"]
 [ext_resource type="PackedScene" uid="uid://50y0e1gwhp37" path="res://Scenes/Enemy.tscn" id="3_4sljb"]
 
@@ -9,8 +10,13 @@
 script = ExtResource("1_6dbt5")
 player = NodePath("Player")
 
-[node name="Node2D" parent="." unique_id=670973258 instance=ExtResource("2_xk2ot")]
-position = Vector2(811, 194)
+[node name="Floor" type="TextureRect" parent="." unique_id=1055928065]
+offset_left = -1959.0
+offset_top = -1585.0
+offset_right = 3451.0
+offset_bottom = 2203.9998
+texture = ExtResource("2_2u33t")
+stretch_mode = 1
 
 [node name="Player" parent="." unique_id=1098916475 instance=ExtResource("1_dg17q")]
 position = Vector2(584, 339)
@@ -22,3 +28,18 @@ health = 100.0
 [node name="Enemy" parent="." unique_id=2055579222 node_paths=PackedStringArray("player") instance=ExtResource("3_4sljb")]
 position = Vector2(311, 206)
 player = NodePath("../Player")
+
+[node name="Obstacle8" parent="." unique_id=1964307232 instance=ExtResource("2_xk2ot")]
+position = Vector2(329, -263)
+
+[node name="Obstacle9" parent="." unique_id=612228806 instance=ExtResource("2_xk2ot")]
+position = Vector2(1806, 838)
+
+[node name="Obstacle10" parent="." unique_id=1078374231 instance=ExtResource("2_xk2ot")]
+position = Vector2(1312, 1124)
+
+[node name="Obstacle11" parent="." unique_id=794171354 instance=ExtResource("2_xk2ot")]
+position = Vector2(1524, 719)
+
+[node name="Obstacle12" parent="." unique_id=1578120979 instance=ExtResource("2_xk2ot")]
+position = Vector2(-736, 1499)

@@ -18,6 +18,8 @@ animations = [{
 radius = 51.0392
 
 [node name="Enemy" type="CharacterBody2D" unique_id=2055579222]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_wovta")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=193133487]
