@@ -40,7 +40,6 @@ public partial class BaseEnemy : CharacterBody2D
 		timeSinceLastShot -= (float)delta;
 		if(timeSinceLastShot <= 0.0f)
         {
-            Print("Firing projectile");
 			// Fire projectile
 			var projectile = GD.Load<PackedScene>("res://Scenes/Projectile.tscn").Instantiate<Projectile>();
 			projectile.GlobalPosition = GlobalPosition;

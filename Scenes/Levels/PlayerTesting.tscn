@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cg273nyklkupw" path="res://Scenes/TestObstacle.tscn" id="2_xk2ot"]
 [ext_resource type="PackedScene" uid="uid://50y0e1gwhp37" path="res://Scenes/Enemy.tscn" id="3_4sljb"]
 [ext_resource type="PackedScene" uid="uid://crtjdpg7blmug" path="res://Scenes/FullAutoEnemy.tscn" id="3_tqebw"]
+[ext_resource type="PackedScene" uid="uid://bmremhyl6npwd" path="res://Scenes/Cork.tscn" id="7_ug5at"]
 
 [node name="MainLevel" type="Node2D" unique_id=974365681 node_paths=PackedStringArray("player")]
 script = ExtResource("1_6dbt5")
@@ -21,6 +22,7 @@ texture = ExtResource("2_2u33t")
 stretch_mode = 1
 
 [node name="Player" parent="." unique_id=1098916475 instance=ExtResource("1_dg17q")]
+z_index = 1
 position = Vector2(584, 339)
 collision_layer = 5
 collision_mask = 5
@@ -45,3 +47,30 @@ position = Vector2(1524, 719)
 
 [node name="Obstacle12" parent="." unique_id=1578120979 instance=ExtResource("2_xk2ot")]
 position = Vector2(-736, 1499)
+
+[node name="Cork" parent="." unique_id=87807184 instance=ExtResource("7_ug5at")]
+position = Vector2(366, 877)
+
+[node name="Cork2" parent="." unique_id=872662446 instance=ExtResource("7_ug5at")]
+position = Vector2(899, 234)
+
+[node name="Cork3" parent="." unique_id=898152045 instance=ExtResource("7_ug5at")]
+position = Vector2(1114, 700)
+
+[node name="Cork4" parent="." unique_id=30024016 instance=ExtResource("7_ug5at")]
+position = Vector2(1439, -129)
+
+[node name="Cork5" parent="." unique_id=653692735 instance=ExtResource("7_ug5at")]
+position = Vector2(1972, -772)
+
+[node name="Cork6" parent="." unique_id=1116079170 instance=ExtResource("7_ug5at")]
+position = Vector2(2187, -306)
+
+[node name="Cork7" parent="." unique_id=2126081273 instance=ExtResource("7_ug5at")]
+position = Vector2(1076, -292)
+
+[node name="Cork8" parent="." unique_id=891174527 instance=ExtResource("7_ug5at")]
+position = Vector2(1609, -935)
+
+[node name="Cork9" parent="." unique_id=1028260613 instance=ExtResource("7_ug5at")]
+position = Vector2(1824, -469)

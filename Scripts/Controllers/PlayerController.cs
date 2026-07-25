@@ -142,7 +142,6 @@ public partial class PlayerController : CharacterBody2D
 
 				healthController.SetFillLevel(health);
 				Print(health);
-				healthController.SpringLeak();
 				body.QueueFree();
 			}
 		}
@@ -152,6 +151,15 @@ public partial class PlayerController : CharacterBody2D
 			healthController.SpringLeak();
 			body.QueueFree();
 			Print($"hit {holes}");
+		}
+		else if (body is Cork)
+		{
+			if(holes > 0)
+			{
+				holes--;
+				healthController.PlugLeak();
+				body.QueueFree();
+			}
 		}
 	}
 }

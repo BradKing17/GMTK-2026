@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bmremhyl6npwd"]
+
+[ext_resource type="Texture2D" uid="uid://nruu7s0ldr2d" path="res://icon.svg" id="1_0fblu"]
+[ext_resource type="Script" uid="uid://bcy8cdgkl1rxh" path="res://Scripts/Controllers/Cork.cs" id="1_x3gv5"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_rdbqk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1t60"]
+size = Vector2(49, 46)
+
+[node name="Cork" type="StaticBody2D" unique_id=30024016]
+scale = Vector2(-1, -1)
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_x3gv5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1552923465]
+rotation = 3.1415925
+scale = Vector2(50, 50)
+mesh = SubResource("QuadMesh_rdbqk")
+texture = ExtResource("1_0fblu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1633858771]
+shape = SubResource("RectangleShape2D_s1t60")
