@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8ooq7um8u668"
+path="res://.godot/imported/Power Projection_loop.wav-82fa2ea207b98cfe611791c9d01cb942.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Power Projection_loop.wav"
+dest_files=["res://.godot/imported/Power Projection_loop.wav-82fa2ea207b98cfe611791c9d01cb942.sample"]
+
+[params]
+
+force/8_bit=true
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

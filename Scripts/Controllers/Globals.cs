@@ -11,36 +11,38 @@ public partial class Globals : Node2D
 
 	[Export]PackedScene corkScene = GD.Load<PackedScene>("res://Scenes/Cork.tscn");
 
-	float enemySpawnRate = 4.0f;
+	[Export]float enemySpawnRate = 4.0f;
+	float timeSinceEnemySpawn;
 
-	float corkSpawnRate = 15.0f;
+	[Export]float corkSpawnRate = 15.0f;
+	float timeSinceCorkSpawn;
 
 
 	[Export]  Godot.Collections.Array<PackedScene> enemies = new Godot.Collections.Array<PackedScene>();
 
 	// Called when the node enters the scene tree for the first time.
-	public override void _EnterTree()
+	public override void _Ready()
 	{
-	
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		enemySpawnRate -= (float)delta;
-		if(enemySpawnRate <= 0.0f)
+		timeSinceEnemySpawn -= (float)delta;
+		if(timeSinceEnemySpawn <= 0.0f)
 		{
 			Print("Spawning enemy");
 			SpawnEnemy();
-			enemySpawnRate = 4.0f;
+			timeSinceEnemySpawn = enemySpawnRate;
 		}
 
-		corkSpawnRate -= (float)delta;
-		if(corkSpawnRate <= 0.0f)
+		timeSinceCorkSpawn -= (float)delta;
+		if(timeSinceCorkSpawn <= 0.0f)
 		{
 			Print("Spawning cork");
 			SpawnCork();
-			corkSpawnRate = 15.0f;
+			timeSinceCorkSpawn = corkSpawnRate;
 		}
 	}
 

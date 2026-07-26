@@ -30,10 +30,14 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private AnimatedSprite2D playerSprite;
 	[Export] private HealthController healthController;
 
+	[Export] private AudioStreamPlayer2D audioPlayer;
+	[Export]  Godot.Collections.Array<AudioStream> hitSounds = new Godot.Collections.Array<AudioStream>();
+
 	private bool canMove = true;
 
 	public override void _Ready()
 	{
+		audioPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 		AddToGroup("Player");
 		GameStart();
 	}
@@ -228,6 +232,10 @@ public partial class PlayerController : CharacterBody2D
 				healthController.SpringLeak();
 				body.QueueFree();
 				Print($"hit {holes}");
+
+				AudioStream audioEffect = hitSounds.PickRandom();
+				audioPlayer.Stream = audioEffect;
+				audioPlayer.Play();
 			}
 		}
 		else if (body is Cork)
