@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c2nk2cy7xyrn5"]
+
+[ext_resource type="Texture2D" uid="uid://b4retsg0qdy4g" path="res://Assets/Art/flat watercooler.PNG" id="1_3e0em"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guo2i"]
+size = Vector2(109.999985, 110.000015)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ja02"]
+radius = 66.0303
+
+[node name="Watercooler" type="Sprite2D" unique_id=1117034831]
+rotation = -3.1415927
+texture = ExtResource("1_3e0em")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1743828669]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2044845965]
+position = Vector2(-0.99999595, -1.0000042)
+shape = SubResource("RectangleShape2D_guo2i")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=15250564]
+shape = SubResource("CircleShape2D_5ja02")

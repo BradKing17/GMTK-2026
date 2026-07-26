@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://lppqiwj2x3vy"]
+
+[ext_resource type="Texture2D" uid="uid://btjlbvpe18gvo" path="res://Assets/Art/flat photocopier.PNG" id="1_yst7c"]
+[ext_resource type="Texture2D" uid="uid://dsdja1wrvy56u" path="res://Assets/Art/photocopierTop.png" id="2_hpl8s"]
+[ext_resource type="Texture2D" uid="uid://cbemex3gt2fto" path="res://Assets/Art/flat paper.PNG" id="3_lpg0r"]
+
+[sub_resource type="Curve" id="Curve_hpl8s"]
+_data = [Vector2(0.95238096, 1), 0.0, -10.807283, 0, 0, Vector2(1, 0), -64.18856, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gt8jh"]
+curve = SubResource("Curve_hpl8s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5ja02"]
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 8.975
+initial_velocity_min = 366.4
+initial_velocity_max = 401.6
+gravity = Vector3(0, 0, 0)
+damping_min = 80.48
+damping_max = 80.48
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_gt8jh")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ja02"]
+size = Vector2(329.6394, 292.28033)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e4ffb"]
+size = Vector2(125.26297, 151.63422)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3h87"]
+size = Vector2(85.70632, 32.963943)
+
+[node name="FlatPhotocopier" type="Sprite2D" unique_id=633441357]
+scale = Vector2(0.45504272, 0.45504272)
+texture = ExtResource("1_yst7c")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1624383992]
+texture_filter = 1
+position = Vector2(19.778362, 4.3951917)
+scale = Vector2(0.99999964, 0.99999964)
+amount = 24
+amount_ratio = 0.85
+texture = ExtResource("3_lpg0r")
+lifetime = 50.0
+speed_scale = 2.5
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_5ja02")
+
+[node name="PhotocopierTop" type="Sprite2D" parent="." unique_id=2080343576]
+position = Vector2(-2.3841855e-07, -4.395187)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("2_hpl8s")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=740484441]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=11506464]
+position = Vector2(-61.532627, -7.69159)
+scale = Vector2(0.9999995, 0.9999995)
+shape = SubResource("RectangleShape2D_5ja02")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=516611944]
+position = Vector2(163.7208, -1.0987933)
+scale = Vector2(0.99999905, 0.99999905)
+shape = SubResource("RectangleShape2D_e4ffb")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=379890944]
+position = Vector2(29.667524, 141.74489)
+scale = Vector2(0.9999986, 0.9999986)
+shape = SubResource("RectangleShape2D_e3h87")

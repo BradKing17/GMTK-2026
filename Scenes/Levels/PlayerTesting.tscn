@@ -26,11 +26,16 @@ stretch_mode = 1
 [node name="Player" parent="." unique_id=1098916475 instance=ExtResource("1_dg17q")]
 z_index = 1
 position = Vector2(584, 339)
+collision_mask = 264
 moveSpeed = 400.0
 health = 100.0
+dodgeCD = 1.0
 
 [node name="Enemy" parent="." unique_id=2055579222 node_paths=PackedStringArray("player") instance=ExtResource("3_4sljb")]
 position = Vector2(311, 206)
+minDistanceToPlayer = 100.0
+maxDistanceToPlayer = 500.0
+projectileSpeed = 300.0
 player = NodePath("../Player")
 
 [node name="Obstacle8" parent="." unique_id=1964307232 instance=ExtResource("2_xk2ot")]
