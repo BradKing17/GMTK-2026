@@ -8,6 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://opxgffply7y6" path="res://Assets/Audio/SFX_ANIME_Hit_Punch_or_Kick_Heavy_003.wav" id="4_yoq75"]
 [ext_resource type="AudioStream" uid="uid://ckmj77m3nr5ee" path="res://Assets/Audio/SFX_ANIME_Hit_Punch_or_Kick_Heavy_004.wav" id="5_ksbbd"]
 [ext_resource type="AudioStream" uid="uid://tak8afqginyf" path="res://Assets/Audio/SFX_ANIME_Hit_Punch_or_Kick_Heavy_005.wav" id="6_glx4g"]
+[ext_resource type="Texture2D" uid="uid://bc0femkhekq70" path="res://Assets/Art/fangs.png" id="9_yoq75"]
+[ext_resource type="Texture2D" uid="uid://5rioarsg0j5l" path="res://Assets/Art/clockwise-rotation.png" id="10_glx4g"]
+[ext_resource type="Texture2D" uid="uid://cx28nqgi1ajhe" path="res://Assets/Art/dodging.png" id="10_ksbbd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1t60"]
 radius = 51.351727
@@ -26,8 +29,35 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite", "healthController")]
-collision_layer = 9
+[sub_resource type="SpriteFrames" id="SpriteFrames_aqlbs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_yoq75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_glx4g")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1t60"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_ksbbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_glx4g")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite", "healthController", "attackIcon", "dodgeIcon")]
 collision_mask = 256
 script = ExtResource("1_rpqav")
 moveSpeed = 50.0
@@ -35,6 +65,8 @@ dodgeCD = 0.5
 playerSprite = NodePath("AnimatedSprite2D")
 healthController = NodePath("HealthJug")
 hitSounds = Array[AudioStream]([ExtResource("2_bhhdu"), ExtResource("3_megsn"), ExtResource("4_yoq75"), ExtResource("5_ksbbd"), ExtResource("6_glx4g")])
+attackIcon = NodePath("AttackIcon")
+dodgeIcon = NodePath("DodgeIcon")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1721885316]
 zoom = Vector2(0.7, 0.7)
@@ -63,5 +95,15 @@ testing = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1060252075]
 volume_db = -40.467
+
+[node name="AttackIcon" type="AnimatedSprite2D" parent="." unique_id=1748460130]
+position = Vector2(718.99994, -0.49996948)
+scale = Vector2(0.13671875, 0.13867188)
+sprite_frames = SubResource("SpriteFrames_aqlbs")
+
+[node name="DodgeIcon" type="AnimatedSprite2D" parent="." unique_id=1281907859]
+position = Vector2(640, -0.5)
+scale = Vector2(0.13671875, 0.13867188)
+sprite_frames = SubResource("SpriteFrames_s1t60")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnOverlap"]
