@@ -33,6 +33,10 @@ public partial class PlayerController : CharacterBody2D
 	[Export] private AudioStreamPlayer2D audioPlayer;
 	[Export]  Godot.Collections.Array<AudioStream> hitSounds = new Godot.Collections.Array<AudioStream>();
 
+	[Export]private AnimatedSprite2D attackIcon;
+
+	[Export]private AnimatedSprite2D dodgeIcon;
+
 	private bool canMove = true;
 
 	public override void _Ready()
@@ -56,6 +60,7 @@ public partial class PlayerController : CharacterBody2D
 		if (isAttacking)
 		{
 			canAttack = false;
+			attackIcon.Frame = 1;
 			timeSinceLastLunge = lungeCD;
 			Velocity = Position.DirectionTo(lungeTarget) * moveSpeed * 3;
 			if (Position.DistanceTo(lungeTarget) > 20.0f)
@@ -72,6 +77,7 @@ public partial class PlayerController : CharacterBody2D
 						Velocity = Vector2.Zero;
 						isAttacking = false;
 						playerSprite.Frame = 0;
+						
 					}
 				}
 			}
@@ -79,11 +85,13 @@ public partial class PlayerController : CharacterBody2D
 			{
 				isAttacking = false;
 				playerSprite.Frame = 0;
+				
 			}
 		}
 		else if (isDodging)
 		{
 			canDodge = false;
+			dodgeIcon.Frame = 1;
 			this.CollisionLayer = 0;
 			this.CollisionMask = 0; // Disable collision with enemies and projectiles
 			timeSinceLastDodge = dodgeCD;
@@ -104,6 +112,7 @@ public partial class PlayerController : CharacterBody2D
 						playerSprite.Frame = 0;
 						this.CollisionLayer = 1;
 						this.CollisionMask = 1; // Re-enable collision with enemies and projectiles
+						
 					}
 				}
 			}
@@ -114,6 +123,7 @@ public partial class PlayerController : CharacterBody2D
 				playerSprite.Frame = 0;
 				this.CollisionLayer = 1;
 				this.CollisionMask = 1; 
+				
 			}
 
 		}
@@ -135,6 +145,7 @@ public partial class PlayerController : CharacterBody2D
 			Print("Lunge ready");
 			canAttack = true;
 			timeSinceLastLunge = lungeCD;
+			attackIcon.Frame = 0;
 		}
 	
 		if(!canDodge)
@@ -147,6 +158,7 @@ public partial class PlayerController : CharacterBody2D
 			Print("Dodge ready");
 			canDodge = true;
 			timeSinceLastDodge = dodgeCD;
+			dodgeIcon.Frame = 0;
 		}
 		//Health drain logic
 		if (holes > 0)
