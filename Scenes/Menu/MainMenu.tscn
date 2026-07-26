@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://dllg2gi83a8l" path="res://Assets/Fonts/One Slice.otf" id="1_a2ivp"]
 [ext_resource type="Texture2D" uid="uid://dtghqviceey6s" path="res://Assets/Art/bloodDrop.png" id="1_mj0i0"]
 [ext_resource type="Script" uid="uid://cht5f63754ot5" path="res://Scripts/MainMenu/MainMenu.cs" id="1_p4pvn"]
-[ext_resource type="PackedScene" uid="uid://ce56x77qgr2up" path="res://Scenes/Levels/PlayerTesting.tscn" id="2_s3ie0"]
+[ext_resource type="PackedScene" uid="uid://c6uygdv2da5pc" path="res://Scenes/Levels/office.tscn" id="2_p4pvn"]
 
 [sub_resource type="Curve" id="Curve_i5oj1"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.35802472, 0.4716981), -4.73774, -4.73774, 0, 0, Vector2(0.4268078, 0), -3.1202824, 0.0, 0, 0]
@@ -142,7 +142,7 @@ _data = {
 [node name="MainMenu" type="Node2D" unique_id=1414753860 node_paths=PackedStringArray("animationPlayer", "playButton")]
 script = ExtResource("1_p4pvn")
 animationPlayer = NodePath("AnimationPlayer")
-mainGame = ExtResource("2_s3ie0")
+mainGame = ExtResource("2_p4pvn")
 playButton = NodePath("Control/Play")
 
 [node name="BloodDrop" type="Sprite2D" parent="." unique_id=1183060385]
@@ -240,7 +240,7 @@ emitting = false
 amount = 1000
 texture = ExtResource("1_mj0i0")
 lifetime = 7.16
-speed_scale = 1.8399999999999999
+speed_scale = 1.84
 randomness = 1.0
 local_coords = true
 trail_enabled = true

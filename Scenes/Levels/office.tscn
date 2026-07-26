@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://c6uygdv2da5pc"]
 
+[ext_resource type="Script" uid="uid://cjlhvnif3xkmr" path="res://Scripts/Controllers/Globals.cs" id="1_a3lee"]
 [ext_resource type="Texture2D" uid="uid://u40qd5yaacsl" path="res://Assets/Art/floor texture.png" id="1_rpxgf"]
 [ext_resource type="Texture2D" uid="uid://xmchakhja8ls" path="res://Assets/Art/flatwall.PNG" id="2_tj0cq"]
 [ext_resource type="Texture2D" uid="uid://c7u6jvfdukto0" path="res://Assets/Art/flat computer.PNG" id="2_vwrhx"]
 [ext_resource type="Texture2D" uid="uid://da2e0h7ruevqj" path="res://Assets/Art/wpixel.png" id="3_48dl1"]
 [ext_resource type="PackedScene" uid="uid://lppqiwj2x3vy" path="res://Assets/Objects/obstacles/photocopier.tscn" id="3_cx0fw"]
+[ext_resource type="PackedScene" uid="uid://crtjdpg7blmug" path="res://Scenes/FullAutoEnemy.tscn" id="3_fjte1"]
 [ext_resource type="PackedScene" uid="uid://dpet5vwu22ly1" path="res://Assets/Objects/obstacles/cubicle.tscn" id="4_tj0cq"]
 [ext_resource type="Texture2D" uid="uid://dyxqxmf8t2nno" path="res://Assets/Art/flat stackofpapers.PNG" id="4_vwrhx"]
 [ext_resource type="Texture2D" uid="uid://cbemex3gt2fto" path="res://Assets/Art/flat paper.PNG" id="5_nmbs0"]
@@ -13,11 +15,29 @@
 [ext_resource type="PackedScene" uid="uid://drbjcu1cvmv1c" path="res://Assets/Objects/obstacles/plant.tscn" id="9_sc7wv"]
 [ext_resource type="PackedScene" uid="uid://oqh5oxx1mkyn" path="res://Scenes/Player.tscn" id="12_a3lee"]
 [ext_resource type="PackedScene" uid="uid://50y0e1gwhp37" path="res://Scenes/Enemy.tscn" id="13_fjte1"]
+[ext_resource type="AudioStream" uid="uid://b8ooq7um8u668" path="res://Assets/Audio/Power Projection_loop.wav" id="14_7mrfc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ja02"]
 size = Vector2(5973.946, 83.56514)
 
-[node name="Office" type="Node2D" unique_id=1209877846]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1t60"]
+size = Vector2(2208.5, 839)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3lee"]
+size = Vector2(935.25, 969.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjte1"]
+size = Vector2(2972, 169)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npqvw"]
+size = Vector2(3925, 385.5)
+
+[node name="Office" type="Node2D" unique_id=1209877846 node_paths=PackedStringArray("player", "spawnAreas")]
+script = ExtResource("1_a3lee")
+player = NodePath("Player")
+corkSpawnRate = 1.0
+spawnAreas = [NodePath("Area2D/CollisionShape2D"), NodePath("Area2D/CollisionShape2D2"), NodePath("Area2D/CollisionShape2D3"), NodePath("Area2D/CollisionShape2D4")]
+enemies = Array[PackedScene]([ExtResource("13_fjte1"), ExtResource("3_fjte1")])
 
 [node name="FloorTexture" type="Sprite2D" parent="." unique_id=379272163]
 z_index = -100
@@ -386,9 +406,34 @@ region_rect = Rect2(0, 1, 80, 80)
 [node name="Player" parent="." unique_id=1011472595 instance=ExtResource("12_a3lee")]
 position = Vector2(634, 629)
 collision_mask = 264
-moveSpeed = 200.0
+moveSpeed = 500.0
 
 [node name="Node" type="Node" parent="." unique_id=1466974794]
 
 [node name="Enemy" parent="Node" unique_id=2055579222 instance=ExtResource("13_fjte1")]
 position = Vector2(540, -1583)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=436948121]
+stream = ExtResource("14_7mrfc")
+volume_db = -36.016
+autoplay = true
+max_distance = 10000.0
+attenuation = 0.004334266
+
+[node name="Area2D" type="Area2D" parent="." unique_id=554324489]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1671001587]
+position = Vector2(1180.75, -1587.5)
+shape = SubResource("RectangleShape2D_s1t60")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1155150296]
+position = Vector2(554.375, -672.75)
+shape = SubResource("RectangleShape2D_a3lee")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D" unique_id=718954850]
+position = Vector2(2560, -299.5)
+shape = SubResource("RectangleShape2D_fjte1")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D" unique_id=1961968466]
+position = Vector2(2038.5, 696.25)
+shape = SubResource("RectangleShape2D_npqvw")

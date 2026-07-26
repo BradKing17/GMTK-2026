@@ -92,8 +92,10 @@ public partial class PlayerController : CharacterBody2D
 		{
 			canDodge = false;
 			dodgeIcon.Frame = 1;
-			this.CollisionLayer = 0;
-			this.CollisionMask = 0; // Disable collision with enemies and projectiles
+			this.SetCollisionMaskValue(1, false);
+			this.SetCollisionMaskValue(4, false);
+			this.SetCollisionLayerValue(1, false);
+
 			timeSinceLastDodge = dodgeCD;
 			Velocity = Position.DirectionTo(dodgeTarget) * moveSpeed * 2;
 			if (Position.DistanceTo(dodgeTarget) > 20.0f)
@@ -110,8 +112,10 @@ public partial class PlayerController : CharacterBody2D
 						Velocity = Vector2.Zero;
 						isDodging = false;
 						playerSprite.Frame = 0;
-						this.CollisionLayer = 1;
-						this.CollisionMask = 1; // Re-enable collision with enemies and projectiles
+						this.SetCollisionMaskValue(1, true);
+						this.SetCollisionMaskValue(4, true);
+
+						this.SetCollisionLayerValue(1, true);
 						
 					}
 				}
@@ -121,8 +125,12 @@ public partial class PlayerController : CharacterBody2D
 			
 				isDodging = false;
 				playerSprite.Frame = 0;
-				this.CollisionLayer = 1;
-				this.CollisionMask = 1; 
+
+				this.SetCollisionMaskValue(1, true);
+				this.SetCollisionMaskValue(4, true);
+
+				this.SetCollisionLayerValue(1, true);
+
 				
 			}
 
@@ -256,8 +264,9 @@ public partial class PlayerController : CharacterBody2D
 			{
 				holes--;
 				healthController.PlugLeak();
-				body.QueueFree();
+				
 			}
+			body.QueueFree();
 		}
 	}
 }

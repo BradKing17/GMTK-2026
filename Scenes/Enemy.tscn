@@ -35,7 +35,7 @@ animation = &"Default"
 shape = SubResource("CircleShape2D_wovta")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=160105726]
-collision_layer = 2
+collision_layer = 10
 collision_mask = 2
 
 [node name="OverlapShape" type="CollisionShape2D" parent="Area2D" unique_id=1598783923]

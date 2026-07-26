@@ -17,6 +17,8 @@ public partial class Globals : Node2D
 	[Export]float corkSpawnRate = 15.0f;
 	float timeSinceCorkSpawn;
 
+	[Export] Godot.Collections.Array<CollisionShape2D> spawnAreas = new Godot.Collections.Array<CollisionShape2D>();
+
 
 	[Export]  Godot.Collections.Array<PackedScene> enemies = new Godot.Collections.Array<PackedScene>();
 
@@ -50,14 +52,23 @@ public partial class Globals : Node2D
 	{
 		var enemyScene = enemies.PickRandom();
 		var enemy = enemyScene.Instantiate<CharacterBody2D>();
-		enemy.Position = new Vector2(player.Position.X + GD.RandRange(-500, 500), player.Position.Y + GD.RandRange(-500, 500));
+		enemy.Position = PositionInRegion();
 		GetTree().CurrentScene.AddChild(enemy);
 	}
 
 		public void SpawnCork()
 	{
 		var cork = corkScene.Instantiate<StaticBody2D>();
-		cork.Position = new Vector2(player.Position.X + GD.RandRange(-500, 500), player.Position.Y + GD.RandRange(-500, 500));
+		cork.Position = PositionInRegion();
 		GetTree().CurrentScene.AddChild(cork);
 	}
+
+	    private Vector2 PositionInRegion()
+    {
+		var spawnRegion = spawnAreas.PickRandom();
+        RectangleShape2D shape = spawnRegion.Shape as RectangleShape2D;
+        Vector2 origin = spawnRegion.Position - shape.Size/2; //unsure as to anchor/origin of shape but this should work from (0,0)
+        Vector2 bounds = new(new RandomNumberGenerator().RandfRange(0,shape.Size.X), new RandomNumberGenerator().RandfRange(0,shape.Size.Y));
+        return new(origin.X + bounds.X, origin.Y + bounds.Y);
+    }
 }

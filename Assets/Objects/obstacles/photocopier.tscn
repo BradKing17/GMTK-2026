@@ -57,8 +57,8 @@ scale = Vector2(0.9999999, 0.9999999)
 texture = ExtResource("2_hpl8s")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=740484441]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 10
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=11506464]
 position = Vector2(-61.532627, -7.69159)
