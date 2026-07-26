@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://dpet5vwu22ly1"]
+
+[ext_resource type="Script" uid="uid://ce5k7ix8a0ncq" path="res://Assets/Objects/obstacles/Cubicle.cs" id="1_2kt3a"]
+[ext_resource type="Texture2D" uid="uid://becfxnnsb0nsx" path="res://Assets/Art/flat cubicle2.PNG" id="1_27yib"]
+[ext_resource type="Texture2D" uid="uid://c7u6jvfdukto0" path="res://Assets/Art/flat computer.PNG" id="2_2kt3a"]
+[ext_resource type="Texture2D" uid="uid://b3gbumpis61s5" path="res://Assets/Art/flat mouse.PNG" id="3_aalcm"]
+[ext_resource type="Texture2D" uid="uid://dyxqxmf8t2nno" path="res://Assets/Art/flat stackofpapers.PNG" id="4_fspwd"]
+[ext_resource type="Texture2D" uid="uid://ssolgioy2x6o" path="res://Assets/Art/flat chair.PNG" id="5_wo05e"]
+[ext_resource type="Texture2D" uid="uid://b46r36wv2j5eq" path="res://Assets/Art/flat towerd.PNG" id="6_vb1q0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_guo2i"]
+radius = 7.0
+height = 320.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_27yib"]
+radius = 56.0
+height = 244.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27yib"]
+size = Vector2(344, 118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kt3a"]
+size = Vector2(251, 102)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ja02"]
+radius = 35.0
+height = 90.0
+
+[node name="Cubicle1" type="Node2D" unique_id=69931468]
+script = ExtResource("1_2kt3a")
+
+[node name="FlatCubicle" type="Sprite2D" parent="." unique_id=1020988676]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_27yib")
+
+[node name="FlatComputer" type="Sprite2D" parent="." unique_id=1368833725]
+position = Vector2(91.00001, 78.000015)
+rotation = -0.007820834
+scale = Vector2(0.5559677, 0.5559677)
+texture = ExtResource("2_2kt3a")
+
+[node name="FlatMouse" type="Sprite2D" parent="." unique_id=2135394500]
+position = Vector2(22, 92)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_aalcm")
+
+[node name="FlatStackofpapers" type="Sprite2D" parent="." unique_id=1724234144]
+position = Vector2(-38, 92)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_fspwd")
+
+[node name="FlatStackofpapers2" type="Sprite2D" parent="." unique_id=1298391714]
+position = Vector2(-37, 92)
+rotation = -0.7251667
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_fspwd")
+
+[node name="FlatTowerd" type="Sprite2D" parent="." unique_id=81749497]
+position = Vector2(149, 11)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_vb1q0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=327876846]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=267583080]
+position = Vector2(-178, 0)
+shape = SubResource("CapsuleShape2D_guo2i")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1338589667]
+position = Vector2(178, 0)
+shape = SubResource("CapsuleShape2D_guo2i")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=807245679]
+visible = false
+position = Vector2(126, 28)
+shape = SubResource("CapsuleShape2D_27yib")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=41350623]
+position = Vector2(-1, 101)
+shape = SubResource("RectangleShape2D_27yib")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D" unique_id=197651611]
+position = Vector2(122, 34.5)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_2kt3a")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1360293191]
+position = Vector2(17, -15)
+rotation = -0.42349014
+collision_layer = 0
+collision_mask = 8
+collision_priority = 2.0
+mass = 3.0
+gravity_scale = 0.0
+linear_damp = 3.0
+angular_damp = 0.6
+
+[node name="FlatChair" type="Sprite2D" parent="RigidBody2D" unique_id=1747483073]
+position = Vector2(0.56033564, -15.895927)
+scale = Vector2(0.64145195, 0.64145195)
+texture = ExtResource("5_wo05e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=120177669]
+light_mask = 8
+visibility_layer = 8
+position = Vector2(-0.43966436, -15.895927)
+scale = Vector2(1.2829039, 1.2829039)
+shape = SubResource("CapsuleShape2D_5ja02")

@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://cg273nyklkupw" path="res://Scenes/TestObstacle.tscn" id="2_xk2ot"]
 [ext_resource type="PackedScene" uid="uid://50y0e1gwhp37" path="res://Scenes/Enemy.tscn" id="3_4sljb"]
 [ext_resource type="PackedScene" uid="uid://crtjdpg7blmug" path="res://Scenes/FullAutoEnemy.tscn" id="3_tqebw"]
+[ext_resource type="PackedScene" uid="uid://dpet5vwu22ly1" path="res://Assets/Objects/obstacles/cubicle.tscn" id="7_ug5at"]
+[ext_resource type="PackedScene" uid="uid://lppqiwj2x3vy" path="res://Assets/Objects/obstacles/photocopier.tscn" id="8_0ylrd"]
+[ext_resource type="PackedScene" uid="uid://drbjcu1cvmv1c" path="res://Assets/Objects/obstacles/plant.tscn" id="9_kkpax"]
+[ext_resource type="PackedScene" uid="uid://c2nk2cy7xyrn5" path="res://Assets/Objects/obstacles/watercooler.tscn" id="10_0ylrd"]
+[ext_resource type="Texture2D" uid="uid://dyxqxmf8t2nno" path="res://Assets/Art/flat stackofpapers.PNG" id="11_kkpax"]
 
 [node name="MainLevel" type="Node2D" unique_id=974365681 node_paths=PackedStringArray("player")]
 script = ExtResource("1_6dbt5")
@@ -23,11 +28,16 @@ stretch_mode = 1
 [node name="Player" parent="." unique_id=1098916475 instance=ExtResource("1_dg17q")]
 z_index = 1
 position = Vector2(584, 339)
+collision_mask = 264
 moveSpeed = 400.0
 health = 100.0
+dodgeCD = 1.0
 
 [node name="Enemy" parent="." unique_id=2055579222 node_paths=PackedStringArray("player") instance=ExtResource("3_4sljb")]
 position = Vector2(311, 206)
+minDistanceToPlayer = 100.0
+maxDistanceToPlayer = 500.0
+projectileSpeed = 300.0
 player = NodePath("../Player")
 
 [node name="Obstacle8" parent="." unique_id=1964307232 instance=ExtResource("2_xk2ot")]
@@ -44,3 +54,66 @@ position = Vector2(1524, 719)
 
 [node name="Obstacle12" parent="." unique_id=1578120979 instance=ExtResource("2_xk2ot")]
 position = Vector2(-736, 1499)
+
+[node name="Obstacles" type="Node2D" parent="." unique_id=263140252]
+
+[node name="Cubicles" type="Node2D" parent="Obstacles" unique_id=784429340]
+
+[node name="Cubicle1" parent="Obstacles/Cubicles" unique_id=69931468 instance=ExtResource("7_ug5at")]
+position = Vector2(518, 790.99994)
+scale = Vector2(0.9, 0.9)
+
+[node name="Cubicle2" parent="Obstacles/Cubicles" unique_id=495921372 instance=ExtResource("7_ug5at")]
+position = Vector2(182, 791)
+scale = Vector2(0.9, 0.9)
+
+[node name="Cubicle3" parent="Obstacles/Cubicles" unique_id=1412003964 instance=ExtResource("7_ug5at")]
+position = Vector2(518, 1081)
+rotation = -3.1415927
+scale = Vector2(0.9, 0.9)
+
+[node name="Cubicle4" parent="Obstacles/Cubicles" unique_id=159323869 instance=ExtResource("7_ug5at")]
+position = Vector2(854, 790.99994)
+scale = Vector2(0.9, 0.9)
+
+[node name="Cubicle5" parent="Obstacles/Cubicles" unique_id=1134857616 instance=ExtResource("7_ug5at")]
+position = Vector2(854, 1081)
+rotation = -3.1415927
+scale = Vector2(0.9, 0.9)
+
+[node name="Cubicle6" parent="Obstacles/Cubicles" unique_id=1565495106 instance=ExtResource("7_ug5at")]
+position = Vector2(182, 1081)
+rotation = -3.1415927
+scale = Vector2(0.9, 0.9)
+
+[node name="Cubicle7" parent="Obstacles/Cubicles" unique_id=1261375263 instance=ExtResource("7_ug5at")]
+position = Vector2(-154, 791)
+scale = Vector2(0.9, 0.9)
+
+[node name="Cubicle8" parent="Obstacles/Cubicles" unique_id=1795004754 instance=ExtResource("7_ug5at")]
+position = Vector2(-154, 1081)
+rotation = 3.1415925
+scale = Vector2(0.9, 0.9)
+
+[node name="FlatStackofpapers" type="Sprite2D" parent="Obstacles/Cubicles" unique_id=388225150]
+texture_filter = 1
+position = Vector2(1091, 734)
+scale = Vector2(0.4265627, 0.4265627)
+texture = ExtResource("11_kkpax")
+
+[node name="FlatStackofpapers" type="Sprite2D" parent="Obstacles/Cubicles/FlatStackofpapers" unique_id=749830796]
+texture_filter = 1
+position = Vector2(30.476166, -2.344387)
+rotation = -1.5707964
+texture = ExtResource("11_kkpax")
+
+[node name="FlatPhotocopier" parent="Obstacles/Cubicles" unique_id=633441357 instance=ExtResource("8_0ylrd")]
+position = Vector2(1097, 902.99994)
+rotation = -1.5708923
+
+[node name="FlatPlant" parent="Obstacles/Cubicles" unique_id=229611802 instance=ExtResource("9_kkpax")]
+position = Vector2(1089, 1078)
+rotation = -0.54312706
+
+[node name="FlatWatercooler" parent="Obstacles/Cubicles" unique_id=1117034831 instance=ExtResource("10_0ylrd")]
+position = Vector2(-385, 940)
