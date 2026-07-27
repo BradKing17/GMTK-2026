@@ -37,7 +37,24 @@ public partial class PlayerController : CharacterBody2D
 
 	[Export]private AnimatedSprite2D dodgeIcon;
 
+	[Export]private RichTextLabel timeText;
+	[Export]private RichTextLabel enemiesText;
+	[Export]private RichTextLabel holesText;
+
+	[Export]private Control canvas;
+
+	[Export]private PackedScene mainMenu;
+
+	[Export]private Button quitButton;
+
 	private bool canMove = true;
+
+	//Score stuff
+	private float time;
+
+	private int enemiesKilled = 0;
+
+	private int holesPlugged = 0;
 
 	public override void _Ready()
 	{
@@ -56,6 +73,7 @@ public partial class PlayerController : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		time += (float)delta;
 		//Attacking and moving logic
 		if (isAttacking)
 		{
@@ -177,8 +195,29 @@ public partial class PlayerController : CharacterBody2D
 		if (health <= 0)
 		{
 			Print("You Died");
-			GetTree().Quit();
+			canvas.Visible = true;
+			playerSprite.Frame = 2;
+			canMove = false;
+			canAttack = false;
+			canDodge = false;
+			enemiesText.Text = "Enemies Killed: " + enemiesKilled;
+		
+			holesText.Text = "Holes Plugged: " + holesPlugged;
+		
+			timeText.Text = "Time Survived: " + time;
+
+			quitButton.Pressed += changeToMainScene;
+	
+
+
+			
 		}
+	}
+
+	private void changeToMainScene()
+	{   
+		var scene = ResourceLoader.Load<PackedScene>(mainMenu.ResourcePath);
+		GetTree().ChangeSceneToPacked(scene);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -242,6 +281,7 @@ public partial class PlayerController : CharacterBody2D
 				healthController.SetFillLevel(health);
 				Print(health);
 				body.QueueFree();
+				enemiesKilled++;
 			}
 		}
 		else if (body is Projectile)
@@ -264,7 +304,7 @@ public partial class PlayerController : CharacterBody2D
 			{
 				holes--;
 				healthController.PlugLeak();
-				
+				holesPlugged++;
 			}
 			body.QueueFree();
 		}

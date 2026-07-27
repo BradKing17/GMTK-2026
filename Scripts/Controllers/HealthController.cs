@@ -40,7 +40,7 @@ public partial class HealthController : Node2D
     public void SetFillLevel(float fV)
     {
         textLabel.Text = $"{(int)fV} ml";
-        if( fV > 1) { fV = fV/ 5500 * 100; }
+        if( fV > 1) { fV = fV/ 2000 * 100; }
         material.SetShaderParameter("fill_value", fV / 100);
     }
     public void SlerpToFillLevel(float fromLevel, float destinationLevel, float t)

@@ -8,9 +8,13 @@
 [ext_resource type="AudioStream" uid="uid://opxgffply7y6" path="res://Assets/Audio/SFX_ANIME_Hit_Punch_or_Kick_Heavy_003.wav" id="4_yoq75"]
 [ext_resource type="AudioStream" uid="uid://ckmj77m3nr5ee" path="res://Assets/Audio/SFX_ANIME_Hit_Punch_or_Kick_Heavy_004.wav" id="5_ksbbd"]
 [ext_resource type="AudioStream" uid="uid://tak8afqginyf" path="res://Assets/Audio/SFX_ANIME_Hit_Punch_or_Kick_Heavy_005.wav" id="6_glx4g"]
+[ext_resource type="PackedScene" uid="uid://el10qpxsye3d" path="res://Scenes/Menu/MainMenu.tscn" id="7_1e7my"]
+[ext_resource type="Texture2D" uid="uid://8g8dritdmcbt" path="res://Assets/Art/pngtree-red-blood-splatter-overlay-design-png-image_14184985.png" id="8_glx4g"]
 [ext_resource type="Texture2D" uid="uid://bc0femkhekq70" path="res://Assets/Art/fangs.png" id="9_yoq75"]
 [ext_resource type="Texture2D" uid="uid://5rioarsg0j5l" path="res://Assets/Art/clockwise-rotation.png" id="10_glx4g"]
 [ext_resource type="Texture2D" uid="uid://cx28nqgi1ajhe" path="res://Assets/Art/dodging.png" id="10_ksbbd"]
+[ext_resource type="FontFile" uid="uid://dllg2gi83a8l" path="res://Assets/Fonts/One Slice.otf" id="13_miouo"]
+[ext_resource type="FontFile" uid="uid://bwh3m370tfx0c" path="res://Assets/Fonts/Future TimeSplitters.otf" id="13_o3h8g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s1t60"]
 radius = 51.351727
@@ -23,6 +27,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("2_dewec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_glx4g")
 }],
 "loop": 1,
 "name": &"Default",
@@ -57,17 +64,31 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite", "healthController", "attackIcon", "dodgeIcon")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o3h8g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1e7my"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_arntx"]
+
+[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite", "healthController", "attackIcon", "dodgeIcon", "timeText", "enemiesText", "holesText", "canvas", "quitButton")]
 collision_layer = 9
 collision_mask = 256
 script = ExtResource("1_rpqav")
 moveSpeed = 200.0
+maxHealth = 2000.0
+health = 2000.0
 dodgeCD = 0.5
 playerSprite = NodePath("AnimatedSprite2D")
 healthController = NodePath("HealthJug")
 hitSounds = Array[AudioStream]([ExtResource("2_bhhdu"), ExtResource("3_megsn"), ExtResource("4_yoq75"), ExtResource("5_ksbbd"), ExtResource("6_glx4g")])
 attackIcon = NodePath("AttackIcon")
 dodgeIcon = NodePath("DodgeIcon")
+timeText = NodePath("Control/Score")
+enemiesText = NodePath("Control/Enemies")
+holesText = NodePath("Control/Holes")
+canvas = NodePath("Control")
+mainMenu = ExtResource("7_1e7my")
+quitButton = NodePath("Control/Play")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1721885316]
 zoom = Vector2(0.7, 0.7)
@@ -106,5 +127,61 @@ sprite_frames = SubResource("SpriteFrames_aqlbs")
 position = Vector2(640, -0.5)
 scale = Vector2(0.13671875, 0.13867188)
 sprite_frames = SubResource("SpriteFrames_s1t60")
+
+[node name="Control" type="Control" parent="." unique_id=277704352]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Score" type="RichTextLabel" parent="Control" unique_id=1432998374]
+layout_mode = 0
+offset_left = -501.0
+offset_top = -169.0
+offset_right = -100.0
+offset_bottom = -85.0
+theme_override_fonts/normal_font = ExtResource("13_o3h8g")
+theme_override_fonts/mono_font = ExtResource("13_o3h8g")
+theme_override_font_sizes/normal_font_size = 50
+text = "Score"
+
+[node name="Holes" type="RichTextLabel" parent="Control" unique_id=1436059897]
+layout_mode = 0
+offset_left = -504.0
+offset_top = -94.0
+offset_right = 6.0
+offset_bottom = -20.0
+theme_override_fonts/normal_font = ExtResource("13_o3h8g")
+theme_override_font_sizes/normal_font_size = 50
+text = "Holes Plugged
+"
+
+[node name="Enemies" type="RichTextLabel" parent="Control" unique_id=1277110401]
+layout_mode = 0
+offset_left = -507.0
+offset_top = -30.0
+offset_right = -45.0
+offset_bottom = 41.0
+theme_override_fonts/normal_font = ExtResource("13_o3h8g")
+theme_override_font_sizes/normal_font_size = 50
+text = "Enemies Killed"
+
+[node name="Play" type="Button" parent="Control" unique_id=325475042]
+layout_mode = 0
+offset_left = -513.0
+offset_top = 68.0
+offset_right = -362.0
+offset_bottom = 166.0
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_pressed_color = Color(0.18598092, 0.18598092, 0.18598086, 1)
+theme_override_colors/font_hover_color = Color(0.42493114, 0.4249309, 0.42493057, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("13_miouo")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o3h8g")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1e7my")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_arntx")
+text = "quit"
 
 [connection signal="body_entered" from="Area2D" to="." method="OnOverlap"]

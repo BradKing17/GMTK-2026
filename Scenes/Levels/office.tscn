@@ -35,7 +35,8 @@ size = Vector2(3925, 385.5)
 [node name="Office" type="Node2D" unique_id=1209877846 node_paths=PackedStringArray("player", "spawnAreas")]
 script = ExtResource("1_a3lee")
 player = NodePath("Player")
-corkSpawnRate = 1.0
+enemySpawnRate = 3.0
+corkSpawnRate = 10.0
 spawnAreas = [NodePath("Area2D/CollisionShape2D"), NodePath("Area2D/CollisionShape2D2"), NodePath("Area2D/CollisionShape2D3"), NodePath("Area2D/CollisionShape2D4")]
 enemies = Array[PackedScene]([ExtResource("13_fjte1"), ExtResource("3_fjte1")])
 
@@ -353,32 +354,32 @@ region_enabled = true
 region_rect = Rect2(0, 0, 5916, 86.354)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="OuterWall/OuterWall/OuterWall/OuterWall" unique_id=1895193461]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 10
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWall/OuterWall/OuterWall/OuterWall/StaticBody2D" unique_id=1766442780]
 position = Vector2(0.7116699, 1.2339916)
 shape = SubResource("RectangleShape2D_5ja02")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="OuterWall/OuterWall/OuterWall" unique_id=1488718700]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 10
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWall/OuterWall/OuterWall/StaticBody2D" unique_id=1657459021]
 position = Vector2(0.7116699, 1.2339916)
 shape = SubResource("RectangleShape2D_5ja02")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="OuterWall/OuterWall" unique_id=764530867]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 10
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWall/OuterWall/StaticBody2D" unique_id=655082013]
 position = Vector2(0.7116699, 1.2339916)
 shape = SubResource("RectangleShape2D_5ja02")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="OuterWall" unique_id=308199531]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 10
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWall/StaticBody2D" unique_id=511089872]
 position = Vector2(0.7116699, 1.2339916)
