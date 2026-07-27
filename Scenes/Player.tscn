@@ -70,7 +70,7 @@ animations = [{
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_arntx"]
 
-[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite", "healthController", "attackIcon", "dodgeIcon", "timeText", "enemiesText", "holesText", "canvas", "quitButton")]
+[node name="Player" type="CharacterBody2D" unique_id=1011472595 node_paths=PackedStringArray("playerSprite", "healthController", "audioPlayer", "attackIcon", "dodgeIcon", "timeText", "enemiesText", "holesText", "canvas", "quitButton")]
 collision_layer = 9
 collision_mask = 256
 script = ExtResource("1_rpqav")
@@ -80,6 +80,7 @@ health = 2000.0
 dodgeCD = 0.5
 playerSprite = NodePath("AnimatedSprite2D")
 healthController = NodePath("HealthJug")
+audioPlayer = NodePath("AudioStreamPlayer2D")
 hitSounds = Array[AudioStream]([ExtResource("2_bhhdu"), ExtResource("3_megsn"), ExtResource("4_yoq75"), ExtResource("5_ksbbd"), ExtResource("6_glx4g")])
 attackIcon = NodePath("AttackIcon")
 dodgeIcon = NodePath("DodgeIcon")

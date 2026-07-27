@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ce56x77qgr2up"]
 
 [ext_resource type="Script" uid="uid://cjlhvnif3xkmr" path="res://Scripts/Controllers/Globals.cs" id="1_6dbt5"]
-[ext_resource type="PackedScene" uid="uid://oqh5oxx1mkyn" path="res://Scenes/Player.tscn" id="1_dg17q"]
+[ext_resource type="PackedScene" uid="uid://bqptxoqkwb6j8" path="res://Scenes/Projectile.tscn" id="1_dg17q"]
 [ext_resource type="Texture2D" uid="uid://u40qd5yaacsl" path="res://Assets/Art/floor texture.png" id="2_2u33t"]
 [ext_resource type="PackedScene" uid="uid://cg273nyklkupw" path="res://Scenes/TestObstacle.tscn" id="2_xk2ot"]
 [ext_resource type="PackedScene" uid="uid://50y0e1gwhp37" path="res://Scenes/Enemy.tscn" id="3_4sljb"]

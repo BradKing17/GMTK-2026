@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://oqh5oxx1mkyn" path="res://Scenes/Player.tscn" id="12_a3lee"]
 [ext_resource type="PackedScene" uid="uid://50y0e1gwhp37" path="res://Scenes/Enemy.tscn" id="13_fjte1"]
 [ext_resource type="AudioStream" uid="uid://b8ooq7um8u668" path="res://Assets/Audio/Power Projection_loop.wav" id="14_7mrfc"]
+[ext_resource type="PackedScene" uid="uid://el10qpxsye3d" path="res://Scenes/Menu/MainMenu.tscn" id="16_fjte1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ja02"]
 size = Vector2(5973.946, 83.56514)
@@ -32,9 +33,8 @@ size = Vector2(2972, 169)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_npqvw"]
 size = Vector2(3925, 385.5)
 
-[node name="Office" type="Node2D" unique_id=1209877846 node_paths=PackedStringArray("player", "spawnAreas")]
+[node name="Office" type="Node2D" unique_id=1209877846 node_paths=PackedStringArray("spawnAreas")]
 script = ExtResource("1_a3lee")
-player = NodePath("Player")
 enemySpawnRate = 3.0
 corkSpawnRate = 10.0
 spawnAreas = [NodePath("Area2D/CollisionShape2D"), NodePath("Area2D/CollisionShape2D2"), NodePath("Area2D/CollisionShape2D3"), NodePath("Area2D/CollisionShape2D4")]
@@ -404,10 +404,11 @@ texture = ExtResource("3_48dl1")
 region_enabled = true
 region_rect = Rect2(0, 1, 80, 80)
 
-[node name="Player" parent="." unique_id=1011472595 instance=ExtResource("12_a3lee")]
-position = Vector2(634, 629)
-collision_mask = 264
-moveSpeed = 500.0
+[node name="Player" parent="." unique_id=1011472595 node_paths=PackedStringArray("audioPlayer") instance=ExtResource("12_a3lee")]
+position = Vector2(594, 651)
+moveSpeed = 600.0
+audioPlayer = NodePath("../AudioStreamPlayer2D")
+mainMenu = ExtResource("16_fjte1")
 
 [node name="Node" type="Node" parent="." unique_id=1466974794]
 

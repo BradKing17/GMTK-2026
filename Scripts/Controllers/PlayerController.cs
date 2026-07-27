@@ -43,8 +43,6 @@ public partial class PlayerController : CharacterBody2D
 
 	[Export]private Control canvas;
 
-	[Export]private PackedScene mainMenu;
-
 	[Export]private Button quitButton;
 
 	private bool canMove = true;
@@ -61,6 +59,7 @@ public partial class PlayerController : CharacterBody2D
 		audioPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 		AddToGroup("Player");
 		GameStart();
+		quitButton.Pressed += changeToMainScene;
 	}
 	public void GameStart()
 	{
@@ -73,91 +72,95 @@ public partial class PlayerController : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		time += (float)delta;
-		//Attacking and moving logic
-		if (isAttacking)
+
+		if(canMove)
 		{
-			canAttack = false;
-			attackIcon.Frame = 1;
-			timeSinceLastLunge = lungeCD;
-			Velocity = Position.DirectionTo(lungeTarget) * moveSpeed * 3;
-			if (Position.DistanceTo(lungeTarget) > 20.0f)
+			time += (float)delta;
+			//Attacking and moving logic
+			if (isAttacking)
 			{
-				bool collided = MoveAndSlide();
-				if (collided)
+				canAttack = false;
+				attackIcon.Frame = 1;
+				timeSinceLastLunge = lungeCD;
+				Velocity = Position.DirectionTo(lungeTarget) * moveSpeed * 3;
+				if (Position.DistanceTo(lungeTarget) > 20.0f)
 				{
-					if(collided && GetSlideCollision(0).GetCollider() is Projectile)
+					bool collided = MoveAndSlide();
+					if (collided)
 					{
-						Print("Collided with projectile");
-					}
-					else
-					{
-						Velocity = Vector2.Zero;
-						isAttacking = false;
-						playerSprite.Frame = 0;
-						
+						if(collided && GetSlideCollision(0).GetCollider() is Projectile)
+						{
+							Print("Collided with projectile");
+						}
+						else
+						{
+							Velocity = Vector2.Zero;
+							isAttacking = false;
+							playerSprite.Frame = 0;
+							
+						}
 					}
 				}
-			}
-			else
-			{
-				isAttacking = false;
-				playerSprite.Frame = 0;
-				
-			}
-		}
-		else if (isDodging)
-		{
-			canDodge = false;
-			dodgeIcon.Frame = 1;
-			this.SetCollisionMaskValue(1, false);
-			this.SetCollisionMaskValue(4, false);
-			this.SetCollisionLayerValue(1, false);
-
-			timeSinceLastDodge = dodgeCD;
-			Velocity = Position.DirectionTo(dodgeTarget) * moveSpeed * 2;
-			if (Position.DistanceTo(dodgeTarget) > 20.0f)
-			{
-				bool collided = MoveAndSlide();
-				if (collided)
+				else
 				{
-					if(collided && GetSlideCollision(0).GetCollider() is Projectile)
-					{
-						Print("Collided with projectile");
-					}
-					else
-					{
-						Velocity = Vector2.Zero;
-						isDodging = false;
-						playerSprite.Frame = 0;
-						this.SetCollisionMaskValue(1, true);
-						this.SetCollisionMaskValue(4, true);
-
-						this.SetCollisionLayerValue(1, true);
-						
-					}
+					isAttacking = false;
+					playerSprite.Frame = 0;
+					
 				}
 			}
-			else
+			else if (isDodging)
 			{
-			
-				isDodging = false;
-				playerSprite.Frame = 0;
+				canDodge = false;
+				dodgeIcon.Frame = 1;
+				this.SetCollisionMaskValue(1, false);
+				this.SetCollisionMaskValue(4, false);
+				this.SetCollisionLayerValue(1, false);
 
-				this.SetCollisionMaskValue(1, true);
-				this.SetCollisionMaskValue(4, true);
+				timeSinceLastDodge = dodgeCD;
+				Velocity = Position.DirectionTo(dodgeTarget) * moveSpeed * 2;
+				if (Position.DistanceTo(dodgeTarget) > 20.0f)
+				{
+					bool collided = MoveAndSlide();
+					if (collided)
+					{
+						if(collided && GetSlideCollision(0).GetCollider() is Projectile)
+						{
+							Print("Collided with projectile");
+						}
+						else
+						{
+							Velocity = Vector2.Zero;
+							isDodging = false;
+							playerSprite.Frame = 0;
+							this.SetCollisionMaskValue(1, true);
+							this.SetCollisionMaskValue(4, true);
 
-				this.SetCollisionLayerValue(1, true);
-
+							this.SetCollisionLayerValue(1, true);
+							
+						}
+					}
+				}
+				else
+				{
 				
+					isDodging = false;
+					playerSprite.Frame = 0;
+
+					this.SetCollisionMaskValue(1, true);
+					this.SetCollisionMaskValue(4, true);
+
+					this.SetCollisionLayerValue(1, true);
+
+					
+				}
+
 			}
 
-		}
-
-		else
-		{
-			GetInput();
-			MoveAndSlide();
+			else
+			{
+				GetInput();
+				MoveAndSlide();
+			}
 		}
 
 		//Reset lunge cooldown
@@ -204,9 +207,9 @@ public partial class PlayerController : CharacterBody2D
 		
 			holesText.Text = "Holes Plugged: " + holesPlugged;
 		
-			timeText.Text = "Time Survived: " + time;
+			timeText.Text = "Time Survived: " + Math.Truncate(time);
 
-			quitButton.Pressed += changeToMainScene;
+			
 	
 
 
@@ -216,7 +219,7 @@ public partial class PlayerController : CharacterBody2D
 
 	private void changeToMainScene()
 	{   
-		var scene = ResourceLoader.Load<PackedScene>(mainMenu.ResourcePath);
+		var scene = ResourceLoader.Load<PackedScene>("res://Scenes/Menu/MainMenu.tscn");
 		GetTree().ChangeSceneToPacked(scene);
 	}
 
